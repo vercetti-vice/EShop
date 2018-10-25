@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EShop.Controllers
 {
-  [Authorize(Policy = "ApiUser")]
+  //[Authorize(Policy = "AppUser")]
   [Route("api/[controller]/[action]")]
   public class DashboardController : Controller
   {

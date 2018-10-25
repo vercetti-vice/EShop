@@ -1,70 +1,134 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using EShop.Auth;
-using EShop.Core.Entities;
-using EShop.Core.Entities.ViewModels;
-using EShop.Helpers;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+using EShop.Helpers;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using EShop.Services;
+using EShop.Core.Dtos;
+using EShop.Core.Entities;
 
 namespace EShop.Controllers
 {
-  [Route("api/[controller]")]
-  public class AuthController : Controller
+  [Authorize]
+  [ApiController]
+  [Route("[controller]")]
+  public class UsersController : ControllerBase
   {
-    private readonly UserManager<AppUser> _userManager;
-    private readonly IJwtFactory _jwtFactory;
-    private readonly JwtIssuerOptions _jwtOptions;
+    private IUserService _userService;
+    private IMapper _mapper;
+    private readonly AppSettings _appSettings;
 
-    public AuthController(UserManager<AppUser> userManager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions)
+    public UsersController(
+        IUserService userService,
+        IMapper mapper,
+        IOptions<AppSettings> appSettings)
     {
-      _userManager = userManager;
-      _jwtFactory = jwtFactory;
-      _jwtOptions = jwtOptions.Value;
+      _userService = userService;
+      _mapper = mapper;
+      _appSettings = appSettings.Value;
     }
 
-    // POST api/auth/login
-    [HttpPost("login")]
-    public async Task<IActionResult> Post([FromBody]CredentialsViewModel credentials)
+    [AllowAnonymous]
+    [HttpPost("authenticate")]
+    public IActionResult Authenticate([FromBody]UserDto userDto)
     {
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
+      var user = _userService.Authenticate(userDto.UserName, userDto.Password);
 
-      var identity = await GetClaimsIdentity(credentials.UserName, credentials.Password);
-      if (identity == null)
-      {
-        return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
-      }
+      if (user == null)
+        return BadRequest(new { message = "Username or password is incorrect" });
 
-      var jwt = await Tokens.GenerateJwt(identity, _jwtFactory, credentials.UserName, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
-      return new OkObjectResult(jwt);
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+      var tokenDescriptor = new SecurityTokenDescriptor
+      {
+        Subject = new ClaimsIdentity(new Claim[]
+          {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+          }),
+        Expires = DateTime.UtcNow.AddDays(7),
+        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+      };
+      var token = tokenHandler.CreateToken(tokenDescriptor);
+      var tokenString = tokenHandler.WriteToken(token);
+
+      // return basic user info (without password) and token to store client side
+      return Ok(new
+      {
+        Id = user.Id,
+        Username = user.UserName,
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        Token = tokenString
+      });
     }
 
-    private async Task<ClaimsIdentity> GetClaimsIdentity(string userName, string password)
+    [AllowAnonymous]
+    [HttpPost("register")]
+    public IActionResult Register([FromBody]UserDto userDto)
     {
-      if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
-        return await Task.FromResult<ClaimsIdentity>(null);
+      // map dto to entity
+      var user = _mapper.Map<AppUser>(userDto);
 
-      // get the user to verifty
-      var userToVerify = await _userManager.FindByNameAsync(userName);
-
-      if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);
-
-      // check the credentials
-      if (await _userManager.CheckPasswordAsync(userToVerify, password))
+      try
       {
-        return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id));
+        // save 
+        _userService.Create(user, userDto.Password);
+        return Ok();
       }
+      catch (AppException ex)
+      {
+        // return error message if there was an exception
+        return BadRequest(new { message = ex.Message });
+      }
+    }
 
-      // Credentials are invalid, or account doesn't exist
-      return await Task.FromResult<ClaimsIdentity>(null);
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+      var users = _userService.GetAll();
+      var userDtos = _mapper.Map<IList<UserDto>>(users);
+      return Ok(userDtos);
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetById(string id)
+    {
+      var user = _userService.GetById(id);
+      var userDto = _mapper.Map<UserDto>(user);
+      return Ok(userDto);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, [FromBody]UserDto userDto)
+    {
+      // map dto to entity and set id
+      var user = _mapper.Map<AppUser>(userDto);
+      user.Id = id.ToString();
+
+      try
+      {
+        // save 
+        _userService.Update(user, userDto.Password);
+        return Ok();
+      }
+      catch (AppException ex)
+      {
+        // return error message if there was an exception
+        return BadRequest(new { message = ex.Message });
+      }
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+      _userService.Delete(id);
+      return Ok();
     }
   }
 }
