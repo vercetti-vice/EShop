@@ -14,7 +14,7 @@ namespace EShop.Services
     AppUser GetById(string id);
     AppUser Create(AppUser user, string password);
     void Update(AppUser user, string password = null);
-    void Delete(int id);
+    void Delete(string id);
   }
 
   public class UserService : IUserService
@@ -109,7 +109,7 @@ namespace EShop.Services
       _context.SaveChanges();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
       var user = _context.Users.Find(id);
       if (user != null)

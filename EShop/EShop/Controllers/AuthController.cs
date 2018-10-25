@@ -125,7 +125,7 @@ namespace EShop.Controllers
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(string id)
     {
       _userService.Delete(id);
       return Ok();
