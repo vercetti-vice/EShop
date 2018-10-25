@@ -105,11 +105,11 @@ namespace EShop.Controllers
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody]UserDto userDto)
+    public IActionResult Update(string id, [FromBody]UserDto userDto)
     {
       // map dto to entity and set id
       var user = _mapper.Map<AppUser>(userDto);
-      user.Id = id.ToString();
+      user.Id = id;
 
       try
       {
