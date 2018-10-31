@@ -17,7 +17,7 @@ namespace EShop.Infrastructure.Data
 
     }
 
-    public DbSet<Customer> Customers { get; set; }
+    //public DbSet<Customer> Customers { get; set; }
   }
 
   public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>

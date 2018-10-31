@@ -94,6 +94,8 @@ namespace EShop.Services
       user.FirstName = userParam.FirstName;
       user.LastName = userParam.LastName;
       user.UserName = userParam.UserName;
+      user.City = userParam.City;
+      user.Email = userParam.Email;
 
       // update password if it was entered
       if (!string.IsNullOrWhiteSpace(password))

@@ -42,8 +42,14 @@ namespace EShop
     {
       services.AddCors();
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+      // TODO : Uncomment
+      // services.AddDbContext<ApplicationDbContext>(options =>
+      //   options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+      // TODO : Comment
       services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+        options.UseInMemoryDatabase("ApplicationDbContext"));
 
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -98,10 +104,11 @@ namespace EShop
         app.UseHsts();
       }
 
-      using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-      {
-        scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-      }
+      // TODO : Uncomment
+      //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+      //{
+      //  scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+      //}
 
       app.UseCors(x => x
               .AllowAnyOrigin()
