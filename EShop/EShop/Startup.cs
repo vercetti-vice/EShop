@@ -45,8 +45,16 @@ namespace EShop
       services.AddCors();
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-      services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+      if (Environment.IsDevelopment())
+      {
+        services.AddDbContext<ApplicationDbContext>(options =>
+          options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+      }
+      else
+      {
+        services.AddDbContext<ApplicationDbContext>(options =>
+          options.UseInMemoryDatabase();
+      }
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
