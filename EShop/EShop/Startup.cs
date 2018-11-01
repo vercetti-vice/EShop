@@ -30,21 +30,23 @@ namespace EShop
     private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
     private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
-    public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
+    public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration, IHostingEnvironment env)
     {
       Configuration = configuration;
+      Environment = env;
     }
 
     public IConfiguration Configuration { get; }
+    public IHostingEnvironment Environment { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddCors();
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-      services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
+      
+        services.AddDbContext<ApplicationDbContext>(options =>
+          options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
@@ -98,6 +100,8 @@ namespace EShop
         app.UseHsts();
       }
 
+
+      if(!env.IsDevelopment())
       using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
       {
         scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
