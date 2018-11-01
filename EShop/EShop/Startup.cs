@@ -47,13 +47,13 @@ namespace EShop
 
       if (Environment.IsDevelopment())
       {
+
         services.AddDbContext<ApplicationDbContext>(options =>
           options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
       }
       else
       {
-        services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseInMemoryDatabase();
+        services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
       }
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
