@@ -4,9 +4,13 @@ using System.Text;
 
 namespace EShop.Core.Entities
 {
-  public class City
+  public class City : BaseEntity
   {
-    public int Id { get; set; }
     public string Name { get; set; }
+
+    public City(string name)
+    {
+      Name = name;
+    }
   }
 }

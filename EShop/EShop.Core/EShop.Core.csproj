@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\ViewModels\" />
+    <Compile Remove="Entities\ViewModels\**" />
+    <EmbeddedResource Remove="Entities\ViewModels\**" />
+    <None Remove="Entities\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interfaces\" />
   </ItemGroup>
 

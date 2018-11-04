@@ -4,7 +4,15 @@ using System.Text;
 
 namespace EShop.Core.Entities
 {
-  public class Cart
+  public enum CartState
   {
+    Empty,
+    NotEmpty,
+    Paid
+  }
+  public class Cart : BaseEntity
+  {
+    public CartState State { get; set; }
+
   }
 }
