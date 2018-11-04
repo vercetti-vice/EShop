@@ -23,7 +23,7 @@ namespace EShop.Core.Entities
     public DateTime CreatedTime { get; set; }
     public ShipmentState State { get; set; }
 
-    // TODO : Нужно очень хорошо подумать
+
     public virtual AppUser Owner { get; protected set; }
     public virtual AppUser Courier { get; protected set; }
 

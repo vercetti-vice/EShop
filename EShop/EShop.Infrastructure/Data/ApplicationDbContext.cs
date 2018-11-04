@@ -17,7 +17,12 @@ namespace EShop.Infrastructure.Data
 
     }
 
-    //public DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<City> Cities { get; set; }
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+      base.OnModelCreating(builder);
+    }
+
   }
 
   public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
