@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EShop.Core.Entities
@@ -7,13 +8,21 @@ namespace EShop.Core.Entities
   public class Product : BaseEntity
   {
     public string Name { get; set; }
-    public int CategoryId { get; set; } // FK
-    public int BrandId { get; set; } // FK
-    public int ColorId { get; set; } // FK
+    [ForeignKey("Category")]
+    public int CategoryId { get; set; }
+    [ForeignKey("Brand")]
+    public int BrandId { get; set; } 
+    [ForeignKey("Color")]
+    public int ColorId { get; set; } 
     public double Price { get; set; }
     public string Description { get; set; }
     public double Rating { get; set; } // Нужно вычислять
     public string ImageUrl { get; set; }
+
+
+    public virtual Category Category { get; protected set; }
+    public virtual Brand Brand { get; protected set; }
+    public virtual Color Color { get; protected set; }
 
     public Product(string name, int categoryId, int brandId, int colorId, double price, string description, string imageUrl)
     {

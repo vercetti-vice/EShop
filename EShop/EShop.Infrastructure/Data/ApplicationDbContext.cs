@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace EShop.Infrastructure.Data
 {
-  public class ApplicationDbContext : IdentityDbContext<AppUser>
+  public class ApplicationDbContext : IdentityDbContext<AppUser, Role, string>
   {
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
