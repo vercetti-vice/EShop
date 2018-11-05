@@ -42,6 +42,7 @@ namespace EShop
     {
       services.AddCors();
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+      services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
       // TODO : Uncomment
       // services.AddDbContext<ApplicationDbContext>(options =>
