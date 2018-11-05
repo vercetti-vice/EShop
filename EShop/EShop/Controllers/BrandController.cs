@@ -7,18 +7,17 @@ using EShop.Core.DTOs;
 using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EShop.Controllers
 {
   [ApiController]
   [Route("[controller]")]
-  public class CityController : Controller, ICrud<CityDto>
+  public class BrandController : Controller, ICrud<BrandDto>
   {
-    private IMapper _mapper;
     private ApplicationDbContext _context;
+    private IMapper _mapper;
 
-    public CityController(ApplicationDbContext context, IMapper mapper)
+    public BrandController(ApplicationDbContext context, IMapper mapper)
     {
       _context = context;
       _mapper = mapper;
@@ -27,60 +26,60 @@ namespace EShop.Controllers
     [HttpGet("getall")]
     public ActionResult GetAll()
     {
-      var cities = _context.Cities;
-      return Ok(cities);
+      var brands = _context.Brands;
+      return Ok(brands);
     }
 
     [HttpGet("getbyid")]
     public ActionResult GetById(int id)
     {
-      var city = _context.Cities.Find(id);
+      var brand = _context.Brands.Find(id);
 
-      if (city == null)
+      if (brand == null)
       {
         return NotFound();
       }
 
-      return Ok(city);
+      return Ok(brand);
     }
 
     [HttpPost("create")]
-    public ActionResult Create([FromBody]CityDto item)
+    public ActionResult Create(BrandDto item)
     {
-      var isCityExist = _context.Cities.FirstOrDefault(x => x.Name == item.Name) != null;
+      var isBrandExist = _context.Brands.FirstOrDefault(x => x.Name == item.Name) != null;
 
-      if (isCityExist)
+      if (isBrandExist)
       {
         return BadRequest();
       }
 
-      var city = new City(item.Name);
-      _context.Cities.Add(city);
+      var brand = new Brand(item.Name, item.Description, item.ImageUrl);
+      _context.Brands.Add(brand);
       _context.SaveChanges();
 
       return Ok();
     }
 
     [HttpPut("update")]
-    public ActionResult Update([FromBody]CityDto item)
+    public ActionResult Update(BrandDto item)
     {
-      var isCityExist = _context.Cities.FirstOrDefault(x => x.Name == item.Name) != null;
+      var isBrandExist = _context.Brands.FirstOrDefault(x => x.Name == item.Name) != null;
 
-      if (isCityExist)
+      if (isBrandExist)
       {
         return BadRequest();
       }
 
-      var city = _context.Cities.Find(item.Id);
+      var brand = _context.Brands.Find(item.Id);
 
-      if (city == null)
+      if (brand == null)
       {
         return NotFound();
       }
 
-      _mapper.Map(item, city);
+      _mapper.Map(item, brand);
 
-      _context.Cities.Update(city);
+      _context.Brands.Update(brand);
       _context.SaveChanges();
 
       return Ok();
@@ -89,14 +88,14 @@ namespace EShop.Controllers
     [HttpGet("delete")]
     public ActionResult Delete(int id)
     {
-      var city = _context.Cities.Find(id);
+      var brand = _context.Brands.Find(id);
 
-      if (city == null)
+      if (brand == null)
       {
         return NotFound();
       }
 
-      _context.Cities.Remove(city);
+      _context.Brands.Remove(brand);
       _context.SaveChanges();
 
       return Ok();
