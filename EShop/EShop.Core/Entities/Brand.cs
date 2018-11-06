@@ -11,6 +11,8 @@ namespace EShop.Core.Entities
     public string Description { get; set; }
     public string ImageUrl { get; set; }
 
+    public virtual IEnumerable<Product> Products { get; protected set; }
+
     public Brand(string name, string description, string imageUrl)
     {
       Name = name;

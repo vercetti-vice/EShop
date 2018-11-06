@@ -9,6 +9,8 @@ namespace EShop.Core.Entities
     public string Name { get; set; }
     public string HexCode { get; set; }
 
+    public virtual IEnumerable<Product> Products { get; protected set; }
+
     public Color(string name, string hexCode)
     {
       Name = name;

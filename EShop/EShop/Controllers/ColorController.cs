@@ -27,8 +27,8 @@ namespace EShop.Controllers
     [HttpGet("getall")]
     public ActionResult GetAll()
     {
-      var color = _context.Colors;
-      return Ok(color);
+      var colors = _context.Colors;
+      return Ok(colors);
     }
 
     [HttpGet("getbyid")]
