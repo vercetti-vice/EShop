@@ -28,7 +28,7 @@ namespace EShop.Controllers
     [HttpGet("getall")]
     public ActionResult GetAll()
     {
-      var categories = _context.Categories.Include(x => x.ParentCategories);
+      var categories = _context.Categories.Include(x => x.ParentCategory);
       return Ok(categories);
     }
 
@@ -55,7 +55,7 @@ namespace EShop.Controllers
         return BadRequest();
       }
 
-      var category = new Category(item.Name, item.ParentCategoryId); // TODO : 2 arguments
+      var category = new Category(item.Name, item.ParentCategoryId); 
       _context.Categories.Add(category);
       _context.SaveChanges();
 
@@ -65,13 +65,6 @@ namespace EShop.Controllers
     [HttpPut("update")]
     public ActionResult Update(CategoryDto item)
     {
-      var isCategoryExist = _context.Categories.FirstOrDefault(x => x.Name == item.Name) != null;
-
-      if (isCategoryExist)
-      {
-        return BadRequest();
-      }
-
       var category = _context.Categories.Find(item.Id);
 
       if (category == null)

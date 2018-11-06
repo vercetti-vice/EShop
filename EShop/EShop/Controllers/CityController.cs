@@ -70,13 +70,6 @@ namespace EShop.Controllers
     [HttpPut("update")]
     public ActionResult Update([FromBody]CityDto item)
     {
-      var isCityExist = _context.Cities.FirstOrDefault(x => x.Name == item.Name) != null;
-
-      if (isCityExist)
-      {
-        return BadRequest();
-      }
-
       var city = _context.Cities.Find(item.Id);
 
       if (city == null)

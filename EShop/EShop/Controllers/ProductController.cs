@@ -27,10 +27,7 @@ namespace EShop.Controllers
     [HttpGet("getall")]
     public ActionResult GetAll()
     {
-      var products = _context.Products
-        .Include(x => x.Brand)
-        .Include(y => y.Category)
-        .Include(z => z.Color);
+      var products = _context.Products; // TODO : Подумай насчет Инклюдов
 
       return Ok(products);
     }
@@ -68,13 +65,6 @@ namespace EShop.Controllers
     [HttpPut("update")]
     public ActionResult Update(ProductDto item)
     {
-      var isProductExist = _context.Products.FirstOrDefault(x => x.Name == item.Name) != null;
-
-      if (isProductExist)
-      {
-        return BadRequest();
-      }
-
       var product = _context.Products.Find(item.Id);
 
       if (product == null)

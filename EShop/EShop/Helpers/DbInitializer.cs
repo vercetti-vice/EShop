@@ -62,11 +62,20 @@ namespace EShop.Helpers
         var category2 = new Category("Ноутбуки", parentCategoryId: 1) { Id = 2 };
         var category3 = new Category("Смартфоны", parentCategoryId: 1) { Id = 3 };
         var category4 = new Category("Умные часы", parentCategoryId: 1) { Id = 4 };
+        var category5 = new Category("Apple", parentCategoryId: 3) { Id = 5 };
 
         context.Categories.Add(category1);
         context.Categories.Add(category2);
         context.Categories.Add(category3);
         context.Categories.Add(category4);
+
+        var product1 = new Product("iPhone X", 3, 2, 2, 80000, "The most powerful smartphone ever", "http://iphone.com") { Id = 1 };
+        var product2 = new Product("Samsung S9", 3, 1, 1, 30000, "The worst smartphone ever", "http://samsungs9.com") { Id = 2 };
+        var product3 = new Product("Honor X10", 3, 3, 3, 40000, "The most chinese smartphone ever", "http://honorx10.com") { Id = 3 };
+
+        context.Products.Add(product1);
+        context.Products.Add(product2);
+        context.Products.Add(product3);
 
         context.SaveChanges();
       }

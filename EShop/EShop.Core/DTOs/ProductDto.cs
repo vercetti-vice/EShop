@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using EShop.Core.Entities;
 
 namespace EShop.Core.DTOs
 {
@@ -15,5 +16,9 @@ namespace EShop.Core.DTOs
     public string Description { get; set; }
     public double Rating { get; set; } 
     public string ImageUrl { get; set; }
+
+    public Brand Brand { get; set; }
+    public Category Category { get; set; }
+    public Color Color { get; set; }
   }
 }

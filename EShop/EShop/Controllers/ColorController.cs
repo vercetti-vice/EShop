@@ -64,13 +64,6 @@ namespace EShop.Controllers
     [HttpPut("update")]
     public ActionResult Update(ColorDto item)
     {
-      var isColorExist = _context.Colors.FirstOrDefault(x => x.Name == item.Name) != null;
-
-      if (isColorExist)
-      {
-        return BadRequest();
-      }
-
       var color = _context.Colors.Find(item.Id);
 
       if (color == null)

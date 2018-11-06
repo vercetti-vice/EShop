@@ -63,13 +63,6 @@ namespace EShop.Controllers
     [HttpPut("update")]
     public ActionResult Update(BrandDto item)
     {
-      var isBrandExist = _context.Brands.FirstOrDefault(x => x.Name == item.Name) != null;
-
-      if (isBrandExist)
-      {
-        return BadRequest();
-      }
-
       var brand = _context.Brands.Find(item.Id);
 
       if (brand == null)
