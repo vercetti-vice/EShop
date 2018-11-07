@@ -17,10 +17,13 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { MainComponent } from './main/main.component';;
-import { BrandListComponent } from './brand/brand-list/brand-list.component';
-import { BrandCreateComponent } from './brand/brand-create/brand-create.component'
-;
-import { BrandEditComponent } from './brand/brand-edit/brand-edit.component'
+import { BrandListComponent } from './brand/brand-list/brand-list.component';
+import { BrandCreateComponent } from './brand/brand-create/brand-create.component';
+import { BrandEditComponent } from './brand/brand-edit/brand-edit.component';
+import { ColorListComponent } from './color/color-list/color-list.component';
+import { ColorCreateComponent } from './color/color-create/color-create.component';
+import { ColorEditComponent } from './color/color-edit/color-edit.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -35,10 +38,12 @@ import { BrandEditComponent } from './brand/brand-edit/brand-edit.component'
         LoginComponent,
         RegisterComponent,
         MainComponent,
-        BrandListComponent,
-        BrandCreateComponent
-,
-        BrandEditComponent      ],
+        BrandListComponent,
+        BrandCreateComponent,
+        BrandEditComponent ,
+        ColorListComponent ,
+        ColorCreateComponent ,
+        ColorEditComponent   ],
     providers: [
         AuthGuard,
         AlertService,

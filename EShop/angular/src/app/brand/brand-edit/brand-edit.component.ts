@@ -33,7 +33,7 @@ export class BrandEditComponent implements OnInit {
       id: [this.brand.id, Validators.required],
       name: [this.brand.name, Validators.required],
       description: [this.brand.description, Validators.required],
-      imageUrl: [this.brand.imageUrl, Validators.required],
+      imageUrl: [this.brand.imageUrl, Validators.required]
     });
   }
 
