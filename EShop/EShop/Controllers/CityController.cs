@@ -12,32 +12,39 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace EShop.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("[controller]/[action]")]
   public class CityController : Controller, ICrud<CityDto>
   {
+    private readonly ISieveProcessor _sieveProcessor;
     private IMapper _mapper;
     private ApplicationDbContext _context;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public CityController(ApplicationDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+    public CityController(ApplicationDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor, ISieveProcessor sieveProcessor)
     {
       _context = context;
       _mapper = mapper;
       _httpContextAccessor = httpContextAccessor;
+      _sieveProcessor = sieveProcessor;
     }
 
-    [HttpGet("getall")]
-    public ActionResult GetAll()
+    [HttpGet]
+    public ActionResult GetAll(string sorts, string filters, int page, int pageSize)
     {
-      var cities = _context.Cities;
-      return Ok(cities);
+      var model = new SieveModel { Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize };
+
+      var cities = _context.Cities.AsNoTracking();
+      cities = _sieveProcessor.Apply(model, cities);
+      return Ok(cities.ToList());
     }
 
-    [HttpGet("getbyid")]
+    [HttpGet]
     public ActionResult GetById(int id)
     {
       var city = _context.Cities.Find(id);
@@ -50,7 +57,7 @@ namespace EShop.Controllers
       return Ok(city);
     }
 
-    [HttpPost("create")]
+    [HttpPost]
     public ActionResult Create([FromBody]CityDto item)
     {
       var isCityExist = _context.Cities.FirstOrDefault(x => x.Name == item.Name) != null;
@@ -67,7 +74,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpPut("update")]
+    [HttpPut]
     public ActionResult Update([FromBody]CityDto item)
     {
       var city = _context.Cities.Find(item.Id);
@@ -85,7 +92,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet("delete")]
+    [HttpGet]
     public ActionResult Delete(int id)
     {
       var city = _context.Cities.Find(id);
@@ -101,7 +108,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet("getcity")]
+    [HttpGet]
     public IActionResult GetCity()
     {
       //var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();

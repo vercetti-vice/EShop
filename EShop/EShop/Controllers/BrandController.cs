@@ -7,30 +7,38 @@ using EShop.Core.DTOs;
 using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace EShop.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("[controller]/[action]")]
   public class BrandController : Controller, ICrud<BrandDto>
   {
+    private readonly ISieveProcessor _sieveProcessor;
     private ApplicationDbContext _context;
     private IMapper _mapper;
 
-    public BrandController(ApplicationDbContext context, IMapper mapper)
+    public BrandController(ApplicationDbContext context, IMapper mapper, ISieveProcessor sieveProcessor)
     {
       _context = context;
       _mapper = mapper;
+      _sieveProcessor = sieveProcessor;
     }
 
-    [HttpGet("getall")]
-    public ActionResult GetAll()
+    [HttpGet]
+    public ActionResult GetAll(string sorts, string filters, int page, int pageSize)
     {
-      var brands = _context.Brands;
-      return Ok(brands);
+      var model = new SieveModel {Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize};
+      var brands = _context.Brands.AsNoTracking();
+      brands = _sieveProcessor.Apply(model, brands);
+      return Ok(brands.ToList());
     }
+    
 
-    [HttpGet("getbyid")]
+    [HttpGet]
     public ActionResult GetById(int id)
     {
       var brand = _context.Brands.Find(id);
@@ -43,8 +51,8 @@ namespace EShop.Controllers
       return Ok(brand);
     }
 
-    [HttpPost("create")]
-    public ActionResult Create(BrandDto item)
+    [HttpPost]
+    public ActionResult Create([FromBody]BrandDto item)
     {
       var isBrandExist = _context.Brands.FirstOrDefault(x => x.Name == item.Name) != null;
 
@@ -60,8 +68,8 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpPut("update")]
-    public ActionResult Update(BrandDto item)
+    [HttpPut]
+    public ActionResult Update([FromBody]BrandDto item)
     {
       var brand = _context.Brands.Find(item.Id);
 
@@ -78,7 +86,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet("delete")]
+    [HttpGet]
     public ActionResult Delete(int id)
     {
       var brand = _context.Brands.Find(id);

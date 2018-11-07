@@ -7,31 +7,39 @@ using EShop.Core.DTOs;
 using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace EShop.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("[controller]/[action]")]
   public class ColorController : Controller, ICrud<ColorDto>
   {
+    private readonly ISieveProcessor _sieveProcessor;
     private ApplicationDbContext _context;
     private IMapper _mapper;
 
-    public ColorController(ApplicationDbContext context, IMapper mapper)
+    public ColorController(ApplicationDbContext context, IMapper mapper, ISieveProcessor sieveProcessor)
     {
       _context = context;
       _mapper = mapper;
+      _sieveProcessor = sieveProcessor;
     }
 
 
-    [HttpGet("getall")]
-    public ActionResult GetAll()
+    [HttpGet]
+    public ActionResult GetAll(string sorts, string filters, int page, int pageSize)
     {
-      var colors = _context.Colors;
-      return Ok(colors);
+      var model = new SieveModel { Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize };
+
+      var colors = _context.Colors.AsNoTracking();
+      colors = _sieveProcessor.Apply(model, colors);
+      return Ok(colors.ToList());
     }
 
-    [HttpGet("getbyid")]
+    [HttpGet]
     public ActionResult GetById(int id)
     {
       var color = _context.Colors.Find(id);
@@ -44,8 +52,8 @@ namespace EShop.Controllers
       return Ok(color);
     }
 
-    [HttpPost("create")]
-    public ActionResult Create(ColorDto item)
+    [HttpPost]
+    public ActionResult Create([FromBody]ColorDto item)
     {
       var isColorExist = _context.Colors.FirstOrDefault(x => x.Name == item.Name) != null;
 
@@ -61,8 +69,8 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpPut("update")]
-    public ActionResult Update(ColorDto item)
+    [HttpPut]
+    public ActionResult Update([FromBody]ColorDto item)
     {
       var color = _context.Colors.Find(item.Id);
 
@@ -79,7 +87,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet("delete")]
+    [HttpGet]
     public ActionResult Delete(int id)
     {
       var color = _context.Colors.Find(id);

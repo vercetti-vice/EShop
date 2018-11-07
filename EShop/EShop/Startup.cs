@@ -18,9 +18,13 @@ using Microsoft.Extensions.Options;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using EShop.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using EShop.Extensions;
+using EShop.Extensions.Sieve;
 using Microsoft.AspNetCore.Diagnostics;
+using Sieve.Models;
+using Sieve.Services;
 
 
 namespace EShop
@@ -44,6 +48,11 @@ namespace EShop
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
       services.AddTransient<DbInitializer>();
+
+      services.AddScoped<ISieveProcessor, SieveProcessor>();
+      services.AddScoped<ISieveCustomSortMethods, SieveCustomSortMethods>();
+      services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
+      services.Configure<SieveOptions>(Configuration.GetSection("Sieve"));
 
       // TODO : Uncomment
       // services.AddDbContext<ApplicationDbContext>(options =>

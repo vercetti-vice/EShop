@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Sieve.Attributes;
 
 namespace EShop.Core.Entities
 {
   public class Color : BaseEntity
   {
+    [Sieve(CanFilter = true, CanSort = true)]
     public string Name { get; set; }
     public string HexCode { get; set; }
 

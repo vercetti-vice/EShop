@@ -2,18 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using Sieve.Attributes;
 
 namespace EShop.Core.Entities
 {
   public class Product : BaseEntity
   {
+    [Sieve(CanFilter = true, CanSort = true)]
     public string Name { get; set; }
     [ForeignKey("Category")]
     public int CategoryId { get; set; }
     [ForeignKey("Brand")]
     public int BrandId { get; set; } 
     [ForeignKey("Color")]
-    public int ColorId { get; set; } 
+    public int ColorId { get; set; }
+    [Sieve(CanFilter = true, CanSort = true)]
     public double Price { get; set; }
     public string Description { get; set; }
     public double Rating { get; set; } // Нужно вычислять

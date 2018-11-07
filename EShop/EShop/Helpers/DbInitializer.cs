@@ -44,10 +44,14 @@ namespace EShop.Helpers
         var brand1 = new Brand("Samsung", "Крупнейший корейский производитель техники", "http://asdasd.com") {Id = 1};
         var brand2 = new Brand("Apple", "Самая дорогая американская компания", "http://qweqwe.com") {Id = 2};
         var brand3 = new Brand("Honor", "Странная китайская компания", "http://fghfgh.com") {Id = 3};
+        var brand4 = new Brand("Xiaomi", "Странная китайская компания", "http://fghfgsdfe.com") { Id = 4 };
+        var brand5 = new Brand("Microsoft", "Очередная американская компания", "http://microsoft.com") { Id = 5 };
 
         context.Brands.Add(brand1);
         context.Brands.Add(brand2);
         context.Brands.Add(brand3);
+        context.Brands.Add(brand4);
+        context.Brands.Add(brand5);
 
         var city1 = new City("Казань") {Id = 1};
         var city2 = new City("Москва") {Id = 2};

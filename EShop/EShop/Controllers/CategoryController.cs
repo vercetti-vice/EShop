@@ -8,31 +8,38 @@ using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace EShop.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("[controller]/[action]")]
   public class CategoryController : Controller, ICrud<CategoryDto>
   {
+    private readonly ISieveProcessor _sieveProcessor;
     private ApplicationDbContext _context;
     private IMapper _mapper;
 
-    public CategoryController(ApplicationDbContext context, IMapper mapper)
+    public CategoryController(ApplicationDbContext context, IMapper mapper, ISieveProcessor sieveProcessor)
     {
       _context = context;
       _mapper = mapper;
+      _sieveProcessor = sieveProcessor;
     }
 
 
-    [HttpGet("getall")]
-    public ActionResult GetAll()
+    [HttpGet]
+    public ActionResult GetAll(string sorts, string filters, int page, int pageSize)
     {
-      var categories = _context.Categories.Include(x => x.ParentCategory);
+      var model = new SieveModel { Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize };
+
+      var categories = _context.Categories.Include(x => x.ParentCategory).AsNoTracking();
+      categories = _sieveProcessor.Apply(model, categories);
       return Ok(categories);
     }
 
-    [HttpGet("getbyid")]
+    [HttpGet]
     public ActionResult GetById(int id)
     {
       var category = _context.Categories.Find(id);
@@ -45,8 +52,8 @@ namespace EShop.Controllers
       return Ok(category);
     }
 
-    [HttpPost("create")]
-    public ActionResult Create(CategoryDto item)
+    [HttpPost]
+    public ActionResult Create([FromBody]CategoryDto item)
     {
       var isCategoryExist = _context.Categories.FirstOrDefault(x => x.Name == item.Name) != null;
 
@@ -62,8 +69,8 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpPut("update")]
-    public ActionResult Update(CategoryDto item)
+    [HttpPut]
+    public ActionResult Update([FromBody]CategoryDto item)
     {
       var category = _context.Categories.Find(item.Id);
 
@@ -80,7 +87,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet("delete")]
+    [HttpGet]
     public ActionResult Delete(int id)
     {
       var category = _context.Categories.Find(id);

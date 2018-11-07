@@ -8,8 +8,8 @@ namespace EShop.Controllers
 {
   interface ICrud<T>
   {
-    [HttpGet("getall")]
-    ActionResult GetAll();
+    //[HttpGet("getall")]
+    //ActionResult GetAll();
     [HttpGet("getbyid")]
     ActionResult GetById(int id);
     [HttpPost("create")]

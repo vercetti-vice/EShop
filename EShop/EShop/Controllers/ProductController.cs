@@ -8,31 +8,37 @@ using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace EShop.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("[controller]/[action]")]
   public class ProductController : Controller, ICrud<ProductDto>
   {
+    private readonly ISieveProcessor _sieveProcessor;
     private ApplicationDbContext _context;
     private IMapper _mapper;
 
-    public ProductController(ApplicationDbContext context, IMapper mapper)
+    public ProductController(ApplicationDbContext context, IMapper mapper, ISieveProcessor sieveProcessor)
     {
       _context = context;
       _mapper = mapper;
+      _sieveProcessor = sieveProcessor;
     }
 
-    [HttpGet("getall")]
-    public ActionResult GetAll()
+    [HttpGet]
+    public ActionResult GetAll(string sorts, string filters, int page, int pageSize)
     {
-      var products = _context.Products; // TODO : Подумай насчет Инклюдов
+      var model = new SieveModel { Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize };
 
-      return Ok(products);
+      var products = _context.Products.AsNoTracking(); // TODO : Подумай насчет Инклюдов
+      products = _sieveProcessor.Apply(model, products);
+      return Ok(products.ToList());
     }
 
-    [HttpGet("getbyid")]
+    [HttpGet]
     public ActionResult GetById(int id)
     {
       var product = _context.Products.Find(id);
@@ -45,8 +51,8 @@ namespace EShop.Controllers
       return Ok(product);
     }
 
-    [HttpPost("create")]
-    public ActionResult Create(ProductDto item)
+    [HttpPost]
+    public ActionResult Create([FromBody]ProductDto item)
     {
       var isProductExist = _context.Products.FirstOrDefault(x => x.Name == item.Name) != null;
 
@@ -62,8 +68,8 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpPut("update")]
-    public ActionResult Update(ProductDto item)
+    [HttpPut]
+    public ActionResult Update([FromBody]ProductDto item)
     {
       var product = _context.Products.Find(item.Id);
 
@@ -80,7 +86,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet("delete")]
+    [HttpGet]
     public ActionResult Delete(int id)
     {
       var product = _context.Products.Find(id);

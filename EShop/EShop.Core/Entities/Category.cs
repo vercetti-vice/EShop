@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Sieve.Attributes;
 
 namespace EShop.Core.Entities
 {
   public class Category : BaseEntity
   {
+    [Sieve(CanFilter = true, CanSort = true)]
     public string Name { get; set; }
 
     [ForeignKey("ParentCategories")]
