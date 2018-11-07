@@ -87,7 +87,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet]
+    [HttpDelete]
     public ActionResult Delete(int id)
     {
       var category = _context.Categories.Find(id);

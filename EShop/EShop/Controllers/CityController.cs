@@ -92,7 +92,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet]
+    [HttpDelete]
     public ActionResult Delete(int id)
     {
       var city = _context.Cities.Find(id);

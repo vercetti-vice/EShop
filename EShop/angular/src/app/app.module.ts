@@ -12,12 +12,15 @@ import { routing }        from './app.routing';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { AlertService, AuthenticationService, UserService } from './_services';
+import {AlertService, AuthenticationService, BrandService, UserService} from './_services';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
-import { MainComponent } from './main/main.component';
-
+import { MainComponent } from './main/main.component';;
+import { BrandListComponent } from './brand/brand-list/brand-list.component';
+import { BrandCreateComponent } from './brand/brand-create/brand-create.component'
+;
+import { BrandEditComponent } from './brand/brand-edit/brand-edit.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -31,12 +34,16 @@ import { MainComponent } from './main/main.component';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        MainComponent
-      ],
+        MainComponent,
+        BrandListComponent,
+        BrandCreateComponent
+,
+        BrandEditComponent      ],
     providers: [
         AuthGuard,
         AlertService,
         AuthenticationService,
+        BrandService,
         UserService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

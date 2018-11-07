@@ -86,7 +86,7 @@ namespace EShop.Controllers
       return Ok();
     }
 
-    [HttpGet]
+    [HttpDelete]
     public ActionResult Delete(int id)
     {
       var brand = _context.Brands.Find(id);
