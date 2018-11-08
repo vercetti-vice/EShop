@@ -22,7 +22,10 @@ import { BrandCreateComponent } from './brand/brand-create/brand-create.componen
 import { BrandEditComponent } from './brand/brand-edit/brand-edit.component';
 import { ColorListComponent } from './color/color-list/color-list.component';
 import { ColorCreateComponent } from './color/color-create/color-create.component';
-import { ColorEditComponent } from './color/color-edit/color-edit.component';
+import { ColorEditComponent } from './color/color-edit/color-edit.component';;
+import { CategoryCreateComponent } from './category/category-create/category-create.component';
+import { CategoryListComponent } from './category/category-list/category-list.component';
+import { CategoryEditComponent } from './category/category-edit/category-edit.component';
 
 @NgModule({
     imports: [
@@ -43,7 +46,10 @@ import { ColorEditComponent } from './color/color-edit/color-edit.component';
         BrandEditComponent ,
         ColorListComponent ,
         ColorCreateComponent ,
-        ColorEditComponent   ],
+        ColorEditComponent ,
+        CategoryCreateComponent ,
+        CategoryListComponent ,
+        CategoryEditComponent],
     providers: [
         AuthGuard,
         AlertService,

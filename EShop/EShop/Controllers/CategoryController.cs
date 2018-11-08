@@ -42,7 +42,7 @@ namespace EShop.Controllers
     [HttpGet]
     public ActionResult GetById(int id)
     {
-      var category = _context.Categories.Find(id);
+      var category = _context.Categories.Include(x => x.ParentCategory).FirstOrDefault(y => y.Id == id);
 
       if (category == null)
       {
