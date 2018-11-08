@@ -122,7 +122,7 @@ namespace EShop
       if (!env.IsDevelopment())
         using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-          scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+          //scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
         }
 
 
