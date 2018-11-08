@@ -4,6 +4,7 @@ using System.Linq;
 using EShop.Core.Entities;
 using EShop.Helpers;
 using EShop.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace EShop.Services
 {
@@ -15,12 +16,22 @@ namespace EShop.Services
     AppUser Create(AppUser user, string password);
     void Update(AppUser user, string password = null);
     void Delete(string id);
+    List<IdentityUserRole<string>> GetUserRoles(string id);
+    List<Role> GetRoles();
   }
 
   public class UserService : IUserService
   {
     private ApplicationDbContext _context;
 
+    public List<Role> GetRoles()
+    {
+      return _context.Roles.ToList();
+    }
+    public List<IdentityUserRole<string>> GetUserRoles(string id)
+    {
+      return _context.UserRoles.Where(x => x.UserId == id).ToList();
+    }
     public UserService(ApplicationDbContext context)
     {
       _context = context;

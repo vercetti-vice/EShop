@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using EShop.Services;
 using EShop.Core.Dtos;
 using EShop.Core.Entities;
+using System.Linq;
 
 namespace EShop.Controllers
 {
@@ -43,14 +44,25 @@ namespace EShop.Controllers
       if (user == null)
         return BadRequest(new { message = "Username or password is incorrect" });
 
+      var userRoles = _userService.GetUserRoles(user.Id);
+
+      var roles = _userService.GetRoles();
+
+      
+      List<Claim> claims = new List<Claim>();
+      claims.Add(new Claim(ClaimTypes.Name, user.Id));
+      foreach(var role in userRoles)
+      {
+        var rolename = roles.SingleOrDefault(x=>x.Id==role.RoleId);
+        if(rolename!=null)
+          claims.Add(new Claim(ClaimTypes.Role, rolename.Name));
+      }
+
       var tokenHandler = new JwtSecurityTokenHandler();
       var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
       var tokenDescriptor = new SecurityTokenDescriptor
       {
-        Subject = new ClaimsIdentity(new Claim[]
-          {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-          }),
+        Subject = new ClaimsIdentity(claims),
         Expires = DateTime.UtcNow.AddDays(7),
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
       };
@@ -91,6 +103,7 @@ namespace EShop.Controllers
     [HttpGet]
     public IActionResult GetAll()
     {
+      var x = User.IsInRole("Admin");
       var users = _userService.GetAll();
       var userDtos = _mapper.Map<IList<UserDto>>(users);
       return Ok(userDtos);
@@ -123,7 +136,7 @@ namespace EShop.Controllers
         return BadRequest(new { message = ex.Message });
       }
     }
-
+    [Authorize(Roles ="Admin")]
     [HttpDelete("{id}")]
     public IActionResult Delete(string id)
     {

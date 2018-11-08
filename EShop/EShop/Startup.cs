@@ -21,7 +21,7 @@ using System.Net;
 using Microsoft.AspNetCore.Http;
 using EShop.Extensions;
 using Microsoft.AspNetCore.Diagnostics;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace EShop
 {
@@ -47,13 +47,12 @@ namespace EShop
 
       if (Environment.IsDevelopment())
       {
-
-        services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+        services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
       }
       else
       {
-        services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
+        services.AddDbContext<ApplicationDbContext>(options =>
+          options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))); 
       }
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -114,6 +113,19 @@ namespace EShop
         {
           scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
         }
+
+      using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+      {
+        var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+        var admin  = context.Roles.Add(new Core.Entities.Role("Admin"));
+        context.Roles.Add(new Core.Entities.Role("User"));
+        context.Roles.Add(new Core.Entities.Role("CatalogManager"));
+        context.Roles.Add(new Core.Entities.Role("DilevryAgent"));
+        var user = scope.ServiceProvider.GetRequiredService<IUserService>().Create(new Core.Entities.AppUser() { UserName = "admin", FirstName = "anton" }, "fynjyufyljy");
+        context.UserRoles.Add(new IdentityUserRole<string> { UserId=user.Id, RoleId= admin.Entity.Id});
+        context.SaveChanges();
+      }
+
 
       app.UseCors(x => x
               .AllowAnyOrigin()
