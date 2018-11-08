@@ -20,7 +20,9 @@ namespace EShop
     public static IWebHost CreateWebHost(string[] args) =>
         WebHost.CreateDefaultBuilder(args)
             .UseStartup<Startup>()
-            .UseUrls("http://0.0.0.0:4000")
+            // TODO : Uncomment
+            // .UseUrls("http://localhost:4000")
+            .UseUrls("http://localhost:4000")
             .Build();
     }
 }

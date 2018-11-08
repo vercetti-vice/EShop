@@ -18,9 +18,13 @@ using Microsoft.Extensions.Options;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using EShop.Core.Entities;
 using Microsoft.AspNetCore.Http;
 using EShop.Extensions;
+using EShop.Extensions.Sieve;
 using Microsoft.AspNetCore.Diagnostics;
+using Sieve.Models;
+using Sieve.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace EShop
@@ -44,6 +48,21 @@ namespace EShop
     {
       services.AddCors();
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+      services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+      services.AddTransient<DbInitializer>();
+
+      services.AddScoped<ISieveProcessor, SieveProcessor>();
+      services.AddScoped<ISieveCustomSortMethods, SieveCustomSortMethods>();
+      services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
+      services.Configure<SieveOptions>(Configuration.GetSection("Sieve"));
+
+      // TODO : Uncomment
+      services.AddDbContext<ApplicationDbContext>(options =>
+         options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+      // TODO : Comment
+      //services.AddDbContext<ApplicationDbContext>(options =>
+      //  options.UseInMemoryDatabase("ApplicationDbContext"));
 
       if (Environment.IsDevelopment())
       {
@@ -96,7 +115,7 @@ namespace EShop
       services.AddScoped<IUserService, UserService>();
     }
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbInitializer dbInitializer)
     {
       if (env.IsDevelopment())
       {
@@ -107,6 +126,11 @@ namespace EShop
         app.UseHsts();
       }
 
+      // TODO : Uncomment
+      using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+      {
+        scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+      }
 
       if (!env.IsDevelopment())
         using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -144,6 +168,8 @@ namespace EShop
       app.UseStaticFiles();
       app.UseHttpsRedirection();
       app.UseMvc();
+
+      //dbInitializer.Initialize();
     }
   }
 }

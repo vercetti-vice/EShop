@@ -1,0 +1,26 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { BrandEditComponent } from './brand-edit.component';
+import {beforeEach, describe, expect, it} from "@angular/core/testing/src/testing_internal";
+
+describe('BrandEditComponent', () => {
+  let component: BrandEditComponent;
+  let fixture: ComponentFixture<BrandEditComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ BrandEditComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BrandEditComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

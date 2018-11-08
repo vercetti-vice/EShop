@@ -30,6 +30,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         username: user.username,
                         firstName: user.firstName,
                         lastName: user.lastName,
+                        email: user.email,
+                        city: user.city,
                         token: 'fake-jwt-token'
                     };
 
@@ -115,7 +117,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // pass through any requests not handled above
             return next.handle(request);
-            
+
         }))
 
         // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
