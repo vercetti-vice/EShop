@@ -27,15 +27,15 @@ namespace EShop.Controllers.StaffControllers
       _context = context;
       _mapper = mapper;
     }
-
-    [HttpGet]
+    
+    [HttpGet("roles")]
     public IActionResult GetRoles()
     {
       return new JsonResult(_context.Roles.ToList());
     }
 
 
-    [HttpGet]
+    [HttpGet("user")]
     public IActionResult GetUser(string login)
     {
       var role = _context.UserRoles.ToList();
@@ -46,7 +46,7 @@ namespace EShop.Controllers.StaffControllers
       return new JsonResult(user);
     }
 
-    [HttpGet]
+    [HttpGet("removerole")]
     public IActionResult RemoveRole(string UserId, string roleId)
     {
       var user = _context.Users.FirstOrDefault(x => x.Id == UserId);
@@ -63,7 +63,7 @@ namespace EShop.Controllers.StaffControllers
       return Ok();
     }
 
-    [HttpGet]
+    [HttpGet("setrole")]
     public IActionResult SetRole(string Id, string roleId)
     {
       var user = _context.Users.FirstOrDefault(x => x.Id == Id);
