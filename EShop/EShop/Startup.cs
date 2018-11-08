@@ -56,17 +56,16 @@ namespace EShop
       services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
       services.Configure<SieveOptions>(Configuration.GetSection("Sieve"));
 
-      
       if (Environment.IsDevelopment())
       {
         services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
       }
       else
       {
-        services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))); 
+        services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
+        //services.AddDbContext<ApplicationDbContext>(options =>
+          //options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))); 
       }
-
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
@@ -126,22 +125,22 @@ namespace EShop
           scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
         }
 
-      
-      //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-      //{
-      //  var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
-      //  var admin  = context.Roles.Add(new Core.Entities.Role("Admin"));
-      //  System.Console.WriteLine("Admin created");
-      //  context.Roles.Add(new Core.Entities.Role("User"));
-      //  context.Roles.Add(new Core.Entities.Role("CatalogManager"));
-      //  context.Roles.Add(new Core.Entities.Role("DilevryAgent"));
-      //  var user = scope.ServiceProvider.GetRequiredService<IUserService>().Create(new Core.Entities.AppUser() { UserName = "admin", FirstName = "anton" }, "fynjyufyljy");
-      //  System.Console.WriteLine("registered!");
-      //  context.UserRoles.Add(new IdentityUserRole<string> { UserId=user.Id, RoleId= admin.Entity.Id});
-      //  System.Console.WriteLine("Role added");
-      //  context.SaveChanges();
-      //  System.Console.WriteLine("Changes saved");
-      //}
+
+      using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+      {
+        var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+        var admin = context.Roles.Add(new Core.Entities.Role("Admin"));
+        System.Console.WriteLine("Admin created");
+        context.Roles.Add(new Core.Entities.Role("User"));
+        context.Roles.Add(new Core.Entities.Role("CatalogManager"));
+        context.Roles.Add(new Core.Entities.Role("DilevryAgent"));
+        var user = scope.ServiceProvider.GetRequiredService<IUserService>().Create(new Core.Entities.AppUser() { UserName = "admin", FirstName = "anton" }, "fynjyufyljy");
+        System.Console.WriteLine("registered!");
+        context.UserRoles.Add(new IdentityUserRole<string> { UserId = user.Id, RoleId = admin.Entity.Id });
+        System.Console.WriteLine("Role added");
+        context.SaveChanges();
+        System.Console.WriteLine("Changes saved");
+      }
 
 
       app.UseCors(x => x
@@ -157,7 +156,7 @@ namespace EShop
       app.UseHttpsRedirection();
       app.UseMvc();
 
-      //dbInitializer.Initialize();
+      dbInitializer.Initialize();
     }
   }
 }
