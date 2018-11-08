@@ -56,14 +56,7 @@ namespace EShop
       services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
       services.Configure<SieveOptions>(Configuration.GetSection("Sieve"));
 
-      // TODO : Uncomment
-      services.AddDbContext<ApplicationDbContext>(options =>
-         options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
-      // TODO : Comment
-      //services.AddDbContext<ApplicationDbContext>(options =>
-      //  options.UseInMemoryDatabase("ApplicationDbContext"));
-
+      
       if (Environment.IsDevelopment())
       {
         services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
@@ -73,6 +66,7 @@ namespace EShop
         services.AddDbContext<ApplicationDbContext>(options =>
           options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))); 
       }
+
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
@@ -125,13 +119,7 @@ namespace EShop
       {
         app.UseHsts();
       }
-
-      // TODO : Uncomment
-      using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-      {
-        scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-      }
-
+      
       if (!env.IsDevelopment())
         using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
