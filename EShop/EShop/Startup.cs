@@ -118,12 +118,16 @@ namespace EShop
       {
         var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
         var admin  = context.Roles.Add(new Core.Entities.Role("Admin"));
+        System.Console.WriteLine("Admin created");
         context.Roles.Add(new Core.Entities.Role("User"));
         context.Roles.Add(new Core.Entities.Role("CatalogManager"));
         context.Roles.Add(new Core.Entities.Role("DilevryAgent"));
         var user = scope.ServiceProvider.GetRequiredService<IUserService>().Create(new Core.Entities.AppUser() { UserName = "admin", FirstName = "anton" }, "fynjyufyljy");
+        System.Console.WriteLine("registered!");
         context.UserRoles.Add(new IdentityUserRole<string> { UserId=user.Id, RoleId= admin.Entity.Id});
+        System.Console.WriteLine("Role added");
         context.SaveChanges();
+        System.Console.WriteLine("Changes saved");
       }
 
 
