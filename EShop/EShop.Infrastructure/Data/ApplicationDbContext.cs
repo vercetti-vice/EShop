@@ -16,13 +16,12 @@ namespace EShop.Infrastructure.Data
     {
 
     }
-
     public virtual DbSet<City> Cities { get; set; }
     public virtual DbSet<Brand> Brands { get; set; }
     public virtual DbSet<Color> Colors { get; set; }
     public virtual DbSet<Category> Categories { get; set; }
     public virtual DbSet<Product> Products { get; set; }
-
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
       base.OnModelCreating(builder);

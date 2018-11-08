@@ -25,7 +25,7 @@ using EShop.Extensions.Sieve;
 using Microsoft.AspNetCore.Diagnostics;
 using Sieve.Models;
 using Sieve.Services;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace EShop
 {
@@ -34,12 +34,14 @@ namespace EShop
     private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
     private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
-    public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration)
+    public Startup(Microsoft.Extensions.Configuration.IConfiguration configuration, IHostingEnvironment env)
     {
       Configuration = configuration;
+      Environment = env;
     }
 
     public IConfiguration Configuration { get; }
+    public IHostingEnvironment Environment { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -55,13 +57,22 @@ namespace EShop
       services.Configure<SieveOptions>(Configuration.GetSection("Sieve"));
 
       // TODO : Uncomment
-      // services.AddDbContext<ApplicationDbContext>(options =>
-      //   options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+      services.AddDbContext<ApplicationDbContext>(options =>
+         options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
       // TODO : Comment
-      services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseInMemoryDatabase("ApplicationDbContext"));
+      //services.AddDbContext<ApplicationDbContext>(options =>
+      //  options.UseInMemoryDatabase("ApplicationDbContext"));
 
+      if (Environment.IsDevelopment())
+      {
+        services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase());
+      }
+      else
+      {
+        services.AddDbContext<ApplicationDbContext>(options =>
+          options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))); 
+      }
       services.AddAutoMapper();
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
@@ -116,10 +127,34 @@ namespace EShop
       }
 
       // TODO : Uncomment
+      using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+      {
+        scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+      }
+
+      if (!env.IsDevelopment())
+        using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        {
+          scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+        }
+
+      
       //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
       //{
-      //  scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+      //  var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+      //  var admin  = context.Roles.Add(new Core.Entities.Role("Admin"));
+      //  System.Console.WriteLine("Admin created");
+      //  context.Roles.Add(new Core.Entities.Role("User"));
+      //  context.Roles.Add(new Core.Entities.Role("CatalogManager"));
+      //  context.Roles.Add(new Core.Entities.Role("DilevryAgent"));
+      //  var user = scope.ServiceProvider.GetRequiredService<IUserService>().Create(new Core.Entities.AppUser() { UserName = "admin", FirstName = "anton" }, "fynjyufyljy");
+      //  System.Console.WriteLine("registered!");
+      //  context.UserRoles.Add(new IdentityUserRole<string> { UserId=user.Id, RoleId= admin.Entity.Id});
+      //  System.Console.WriteLine("Role added");
+      //  context.SaveChanges();
+      //  System.Console.WriteLine("Changes saved");
       //}
+
 
       app.UseCors(x => x
               .AllowAnyOrigin()
@@ -134,7 +169,7 @@ namespace EShop
       app.UseHttpsRedirection();
       app.UseMvc();
 
-      dbInitializer.Initialize();
+      //dbInitializer.Initialize();
     }
   }
 }

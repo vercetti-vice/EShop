@@ -14,9 +14,10 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.0.100" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" PrivateAssets="All" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="all">
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.0-preview3-35497" PrivateAssets="all">
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 	</PackageReference>
+	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
 	<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
 	<PackageReference Include="Sieve" Version="2.1.5" />
   </ItemGroup>
