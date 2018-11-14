@@ -5,7 +5,7 @@
         <table class="table-style-two" border="1" sortable-table (sorted)="onSorted($event)">
           <thead>
             <tr>
-              <th sortable-column="name" sort-direction="Name">Имя бренда</th>
+              <th sort-direction="Name">Имя бренда</th>
               <th>Описание</th>
               <th></th>
               <th></th>
@@ -20,5 +20,7 @@
             </tr>
           </tbody>
         </table>
+    <button *ngIf="page > 1" (click)="previousPage()">Предыдущая</button>
+    <button (click)="nextPage()" *ngIf="nextIsActive">Следующая</button>
   </div>
 </div>

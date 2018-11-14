@@ -16,7 +16,9 @@ export class BrandListComponent implements OnInit {
   sorts: string = '';
   filters: string = '';
   page: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 2;
+
+  nextIsActive = true;
 
   constructor(private brandService: BrandService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -38,9 +40,6 @@ export class BrandListComponent implements OnInit {
     });
   }
 
-  @Input('sortable-column')
-  columnName: string;
-
   @Input('sort-direction')
   sortDirection: string = '';
 
@@ -49,5 +48,15 @@ export class BrandListComponent implements OnInit {
     this.sortDirection = this.sortDirection === 'Name' ? '-Name' : 'Name';
     this.sorts = this.sortDirection;
     this.loadAllBrands();
+  }
+
+  previousPage(){
+    this.page -= 1;
+    this.loadAllBrands();
+  }
+
+  nextPage(){
+      this.page += 1;
+      this.loadAllBrands();
   }
 }

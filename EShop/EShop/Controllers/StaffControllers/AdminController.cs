@@ -22,12 +22,12 @@ namespace EShop.Controllers.StaffControllers
     private ApplicationDbContext _context;
     private IMapper _mapper;
 
-    public AdminController(ApplicationDbContext context,IMapper mapper)
+    public AdminController(ApplicationDbContext context, IMapper mapper)
     {
       _context = context;
       _mapper = mapper;
     }
-    
+
     [HttpGet("roles")]
     public IActionResult GetRoles()
     {
@@ -47,36 +47,39 @@ namespace EShop.Controllers.StaffControllers
     }
 
     [HttpGet("removerole")]
-    public IActionResult RemoveRole(string UserId, string roleId)
+    public IActionResult RemoveRole(string userId, string roleId)
     {
-      var user = _context.Users.FirstOrDefault(x => x.Id == UserId);
+      var user = _context.Users.FirstOrDefault(x => x.Id == userId);
       if (user == null)
         return NotFound();
 
-      var userRole = _context.UserRoles.FirstOrDefault(x => x.UserId == UserId && x.RoleId == roleId);
+      var userRole = _context.UserRoles.FirstOrDefault(x => x.UserId == userId && x.RoleId == roleId);
       if (userRole != null)
       {
         _context.Remove(userRole);
         _context.SaveChanges();
         return Ok();
       }
+
       return Ok();
     }
 
     [HttpGet("setrole")]
-    public IActionResult SetRole(string Id, string roleId)
+    public IActionResult SetRole(string id, string roleId)
     {
-      var user = _context.Users.FirstOrDefault(x => x.Id == Id);
+      var user = _context.Users.FirstOrDefault(x => x.Id == id);
+
       if (user == null)
         return NotFound();
-      if (_context.UserRoles.Where(x => x.UserId == Id && x.RoleId == roleId).Count()<1)
+
+      if (_context.UserRoles.Where(x => x.UserId == id && x.RoleId == roleId).Count() < 1)
       {
-        _context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = roleId, UserId = Id });
+        _context.UserRoles.Add(new IdentityUserRole<string>() {RoleId = roleId, UserId = id});
         _context.SaveChanges();
         return Ok();
       }
+
       return Ok();
-      
     }
   }
 }

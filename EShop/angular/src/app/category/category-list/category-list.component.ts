@@ -28,9 +28,6 @@ export class CategoryListComponent implements OnInit {
     this.loadAllCategories();
   }
 
-  @Input('sortable-column')
-  columnName: string;
-
   @Input('sort-direction')
   sortDirection: string = '';
 
@@ -53,4 +50,13 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
+  previousPage(){
+    this.page -= 1;
+    this.loadAllCategories();
+  }
+
+  nextPage(){
+    this.page += 1;
+    this.loadAllCategories();
+  }
 }
