@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminComponent } from './admin.component';
+import {beforeEach, describe, expect, it} from "@angular/core/testing/src/testing_internal";
 
 describe('AdminComponent', () => {
   let component: AdminComponent;

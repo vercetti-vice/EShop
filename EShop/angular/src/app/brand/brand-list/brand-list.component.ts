@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Brand} from "../../_models/brand";
 import {BrandService} from "../../_services";
 import {User} from "../../_models";
@@ -36,5 +36,18 @@ export class BrandListComponent implements OnInit {
     this.brandService.getAll(this.sorts, this.filters, this.page, this.pageSize).pipe(first()).subscribe(brands => {
       this.brands = brands;
     });
+  }
+
+  @Input('sortable-column')
+  columnName: string;
+
+  @Input('sort-direction')
+  sortDirection: string = '';
+
+  @HostListener('click')
+  sort() {
+    this.sortDirection = this.sortDirection === 'Name' ? '-Name' : 'Name';
+    this.sorts = this.sortDirection;
+    this.loadAllBrands();
   }
 }

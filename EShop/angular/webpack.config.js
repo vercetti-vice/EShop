@@ -11,7 +11,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(html|css)$/,
+        test: /\.(html|css|scss)$/,
         loader: 'raw-loader'
       },
     ]
@@ -28,7 +28,8 @@ module.exports = {
     new webpack.DefinePlugin({
       // global app config object
       config: JSON.stringify({
-        apiUrl: 'http://149.154.64.172:4000'
+        // apiUrl: 'http://149.154.64.172:4000'
+        apiUrl: 'http://localhost:4000'
       })
     })
   ],

@@ -28,19 +28,6 @@ namespace EShop.Helpers
       {
         var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-
-        var color1 = new Color("Чёрный", "#000000") {Id = 1};
-        var color2 = new Color("Белый", "#ffffff") {Id = 2};
-        var color3 = new Color("Красный", "#ff0000") {Id = 3};
-        var color4 = new Color("Зелёный", "#008000") {Id = 4};
-        var color5 = new Color("Синий", "#0000ff") {Id = 5};
-
-        context.Colors.Add(color1);
-        context.Colors.Add(color2);
-        context.Colors.Add(color3);
-        context.Colors.Add(color4);
-        context.Colors.Add(color5);
-
         var brand1 = new Brand("Samsung", "Крупнейший корейский производитель техники", "http://asdasd.com") {Id = 1};
         var brand2 = new Brand("Apple", "Самая дорогая американская компания", "http://qweqwe.com") {Id = 2};
         var brand3 = new Brand("Honor", "Странная китайская компания", "http://fghfgh.com") {Id = 3};
@@ -73,9 +60,9 @@ namespace EShop.Helpers
         context.Categories.Add(category3);
         context.Categories.Add(category4);
 
-        var product1 = new Product("iPhone X", 3, 2, 2, 80000, "The most powerful smartphone ever", "http://iphone.com") { Id = 1 };
-        var product2 = new Product("Samsung S9", 3, 1, 1, 30000, "The worst smartphone ever", "http://samsungs9.com") { Id = 2 };
-        var product3 = new Product("Honor X10", 3, 3, 3, 40000, "The most chinese smartphone ever", "http://honorx10.com") { Id = 3 };
+        var product1 = new Product("iPhone X", 3, 2, 80000, "The most powerful smartphone ever", "http://iphone.com") { Id = 1 };
+        var product2 = new Product("Samsung S9", 3, 1, 30000, "The worst smartphone ever", "http://samsungs9.com") { Id = 2 };
+        var product3 = new Product("Honor X10", 3, 3, 40000, "The most chinese smartphone ever", "http://honorx10.com") { Id = 3 };
 
         context.Products.Add(product1);
         context.Products.Add(product2);

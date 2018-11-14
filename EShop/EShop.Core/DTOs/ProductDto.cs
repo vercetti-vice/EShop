@@ -11,7 +11,6 @@ namespace EShop.Core.DTOs
     public string Name { get; set; }
     public int CategoryId { get; set; }
     public int BrandId { get; set; }
-    public int ColorId { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }
     public double Rating { get; set; } 
@@ -19,6 +18,5 @@ namespace EShop.Core.DTOs
 
     public Brand Brand { get; set; }
     public Category Category { get; set; }
-    public Color Color { get; set; }
   }
 }

@@ -35,12 +35,11 @@ export class CategoryEditComponent implements OnInit {
   ngOnInit() {
     this.id = this.activateRoute.snapshot.params['id'];
     this.getCategory(this.id);
-    console.log(this.category);
     this.loadAllCategories();
     this.editCategoryForm = this.formBuilder.group({
       id: [this.category.id, Validators.required],
       name: [this.category.name, Validators.required],
-      parentCategoryId: [this.category.parentCategoryId]
+      parentCategoryId: []
     });
   }
 

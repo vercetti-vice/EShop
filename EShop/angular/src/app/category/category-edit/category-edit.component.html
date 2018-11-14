@@ -19,9 +19,9 @@
           </div>
           <div class="form-group">
             <label for="parentCategoryId">Родительская категория:</label>
-            <select class="form-control" formControlName="parentCategoryId" name="parentCategoryId" >
+            <select class="form-control" formControlName="parentCategoryId">
               <option></option>
-              <option *ngIf="category.parentCategoryId != null" [value]="category.parentCategoryId">{{ category.parentCategory.name }}</option>
+              <option selected *ngIf="category.parentCategoryId != null" [value]="category.parentCategoryId"> {{ category.parentCategory.name }} </option>
               <ng-container *ngFor="let categor of categories">
                 <option [value]="categor.id" *ngIf="categor.id != category.parentCategoryId && categor.id != category.id">
                   {{ categor.name }}

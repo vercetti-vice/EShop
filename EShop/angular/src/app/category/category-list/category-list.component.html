@@ -1,18 +1,22 @@
 <div class="jumbotron">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-6 offset-sm-3">
-        <h1>Привет {{currentUser.firstName}}!</h1>
-        <h3>Все категории:</h3>
-        <ul>
-          <li *ngFor="let category of categories">
-            {{category.name}} <br>
-            <button (click)="deleteCategory(category.id)" class="btn btn-danger">Удалить</button> <button [routerLink]="['/category-edit/' + category.id]" class="btn btn-success">Изменить</button>
-            <br>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <h1>Привет {{currentUser.firstName}}!</h1>
+    <h3>Все категории:</h3>
+      <table class="table-style-two" border="1" sortable-table (sorted)="onSorted($event)">
+        <thead>
+          <tr>
+            <th sortable-column="name" sort-direction="Name">Имя категории</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{category.name}}</td>
+            <td><button (click)="deleteCategory(category.id)" class="btn btn-danger">Удалить</button></td>
+            <td><button [routerLink]="['/category-edit/' + category.id]" class="btn btn-success">Изменить</button></td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </div>
-

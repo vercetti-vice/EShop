@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EShop.Core.Entities
 {
-  public class TechnicalCharacteristic
+  public class TechnicalCharacteristic : BaseEntity
   {
   }
 }

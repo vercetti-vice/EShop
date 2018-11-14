@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {first} from "rxjs/operators";
 import {User} from "../../_models";
-import {Color} from "../../_models/color";
-import {ColorService} from "../../_services/color.service";
 import {Category} from "../../_models/category";
 import {CategoryService} from "../../_services/category.service";
+import {Subscription} from "rxjs/internal/Subscription";
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent implements OnInit {
 
@@ -26,6 +25,19 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadAllCategories();
+  }
+
+  @Input('sortable-column')
+  columnName: string;
+
+  @Input('sort-direction')
+  sortDirection: string = '';
+
+  @HostListener('click')
+  sort() {
+    this.sortDirection = this.sortDirection === 'Name' ? '-Name' : 'Name';
+    this.sorts = this.sortDirection;
     this.loadAllCategories();
   }
 

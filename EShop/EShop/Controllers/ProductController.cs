@@ -61,7 +61,7 @@ namespace EShop.Controllers
         return BadRequest();
       }
 
-      var product = new Product(item.Name, item.CategoryId, item.BrandId, item.ColorId, item.Price, item.Description, item.ImageUrl);
+      var product = new Product(item.Name, item.CategoryId, item.BrandId, item.Price, item.Description, item.ImageUrl);
       _context.Products.Add(product);
       _context.SaveChanges();
 

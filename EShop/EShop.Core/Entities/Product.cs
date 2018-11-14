@@ -14,8 +14,6 @@ namespace EShop.Core.Entities
     public int CategoryId { get; set; }
     [ForeignKey("Brand")]
     public int BrandId { get; set; } 
-    [ForeignKey("Color")]
-    public int ColorId { get; set; }
     [Sieve(CanFilter = true, CanSort = true)]
     public double Price { get; set; }
     public string Description { get; set; }
@@ -25,14 +23,12 @@ namespace EShop.Core.Entities
 
     public virtual Category Category { get; protected set; }
     public virtual Brand Brand { get; protected set; }
-    public virtual Color Color { get; protected set; }
 
-    public Product(string name, int categoryId, int brandId, int colorId, double price, string description, string imageUrl)
+    public Product(string name, int categoryId, int brandId, double price, string description, string imageUrl)
     {
       Name = name;
       CategoryId = categoryId;
       BrandId = brandId;
-      ColorId = colorId;
 
       if (price > 0)
       {

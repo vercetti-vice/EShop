@@ -20,9 +20,6 @@ import { MainComponent } from './main/main.component';;
 import { BrandListComponent } from './brand/brand-list/brand-list.component';
 import { BrandCreateComponent } from './brand/brand-create/brand-create.component';
 import { BrandEditComponent } from './brand/brand-edit/brand-edit.component';
-import { ColorListComponent } from './color/color-list/color-list.component';
-import { ColorCreateComponent } from './color/color-create/color-create.component';
-import { ColorEditComponent } from './color/color-edit/color-edit.component';;
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
@@ -43,10 +40,7 @@ import { CategoryEditComponent } from './category/category-edit/category-edit.co
         MainComponent,
         BrandListComponent,
         BrandCreateComponent,
-        BrandEditComponent ,
-        ColorListComponent ,
-        ColorCreateComponent ,
-        ColorEditComponent ,
+        BrandEditComponent,
         CategoryCreateComponent ,
         CategoryListComponent ,
         CategoryEditComponent],
