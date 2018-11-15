@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EShop.Core.Entities;
 using EShop.Infrastructure.Data;
+using EShop.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EShop.Helpers
@@ -80,6 +82,21 @@ namespace EShop.Helpers
         context.Products.Add(product1);
         context.Products.Add(product2);
         context.Products.Add(product3);
+
+
+        
+        var admin = context.Roles.Add(new Core.Entities.Role("Admin"));
+        System.Console.WriteLine("Admin created");
+        context.Roles.Add(new Core.Entities.Role("User"));
+        context.Roles.Add(new Core.Entities.Role("CatalogManager"));
+        context.Roles.Add(new Core.Entities.Role("DilevryAgent"));
+        var user = serviceScope.ServiceProvider.GetRequiredService<IUserService>().Create(new Core.Entities.AppUser() { UserName = "admin", FirstName = "anton" }, "fynjyufyljy");
+        System.Console.WriteLine("registered!");
+        context.UserRoles.Add(new IdentityUserRole<string> { UserId = user.Id, RoleId = admin.Entity.Id });
+        System.Console.WriteLine("Role added");
+        context.SaveChanges();
+        System.Console.WriteLine("Changes saved");
+
 
         context.SaveChanges();
       }
