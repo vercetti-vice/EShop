@@ -23,6 +23,7 @@ import { BrandEditComponent } from './brand/brand-edit/brand-edit.component';
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component'
 
 @NgModule({
     imports: [
@@ -43,7 +44,8 @@ import { CategoryEditComponent } from './category/category-edit/category-edit.co
         BrandEditComponent,
         CategoryCreateComponent ,
         CategoryListComponent ,
-        CategoryEditComponent],
+        CategoryEditComponent,
+        NavMenuComponent],
     providers: [
         AuthGuard,
         AlertService,

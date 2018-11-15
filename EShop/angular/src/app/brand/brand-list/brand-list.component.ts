@@ -16,9 +16,9 @@ export class BrandListComponent implements OnInit {
   sorts: string = '';
   filters: string = '';
   page: number = 1;
-  pageSize: number = 2;
+  pageSize: number = 10;
 
-  nextIsActive = true;
+  nextIsActive = false;
 
   constructor(private brandService: BrandService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -37,13 +37,20 @@ export class BrandListComponent implements OnInit {
   private loadAllBrands() {
     this.brandService.getAll(this.sorts, this.filters, this.page, this.pageSize).pipe(first()).subscribe(brands => {
       this.brands = brands;
+      if(this.brands.length < this.pageSize){
+        this.nextIsActive = false;
+      }
+      else {
+        this.nextIsActive = true;
+      }
     });
+
+
   }
 
   @Input('sort-direction')
   sortDirection: string = '';
 
-  @HostListener('click')
   sort() {
     this.sortDirection = this.sortDirection === 'Name' ? '-Name' : 'Name';
     this.sorts = this.sortDirection;
@@ -53,6 +60,7 @@ export class BrandListComponent implements OnInit {
   previousPage(){
     this.page -= 1;
     this.loadAllBrands();
+    this.nextIsActive = true;
   }
 
   nextPage(){

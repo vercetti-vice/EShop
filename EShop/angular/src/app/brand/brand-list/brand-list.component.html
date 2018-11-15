@@ -2,10 +2,10 @@
   <div class="container">
         <h1>Привет {{currentUser.firstName}}!</h1>
         <h3>Все бренды:</h3>
-        <table class="table-style-two" border="1" sortable-table (sorted)="onSorted($event)">
+        <table class="table-style-two" border="1" sortable-table>
           <thead>
             <tr>
-              <th sort-direction="Name">Имя бренда</th>
+              <th sort-direction="Name" (click)="sort()">Имя бренда</th>
               <th>Описание</th>
               <th></th>
               <th></th>
@@ -20,7 +20,8 @@
             </tr>
           </tbody>
         </table>
-    <button *ngIf="page > 1" (click)="previousPage()">Предыдущая</button>
-    <button (click)="nextPage()" *ngIf="nextIsActive">Следующая</button>
+    <br>
+    <a class="button15" *ngIf="page > 1" (click)="previousPage()">Предыдущая</a>
+    <a class="button15" (click)="nextPage()" *ngIf="nextIsActive">Следующая</a>
   </div>
 </div>
