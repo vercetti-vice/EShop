@@ -1,0 +1,139 @@
+.full-navbar {
+  display: flex;
+  flex-direction: column;
+
+  .top-banner {
+    display: block;
+    height: 80px;
+    background-color: red;
+    width: 100%;
+  }
+
+  .nav {
+    width: 100%;
+    background-color: #222;
+    height: 70px;
+
+    .nav-container {
+      margin-left: 50px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      .nav-brand {
+        max-width: 220px;
+        display: block;
+
+      }
+
+      .nav-list {
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        color: white;
+
+        .nav-element {
+          padding: 25.6px;
+
+          &:hover {
+            background-color: black;
+          }
+        }
+      }
+
+      .nav-search-box {
+        display: flex;
+        flex-direction: row;
+        width: 400px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin: 11px;
+        background-color: white;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+
+        &:hover {
+          width: 500px;
+        }
+
+        .search-ico {
+          display: block;
+          margin: 14px 0 0 5px;
+        }
+
+        .search {
+          height: 15px;
+          margin: 0;
+          padding: 0;
+          font-size: 120%;
+          border: 1px solid white;
+          width: 386px;
+          outline: none;
+        }
+
+        input[type=text] {
+          padding: 12px 0 0 25px;
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+        }
+      }
+
+      .head-right {
+        display: flex;
+        flex-direction: row;
+
+        .cart {
+          display: flex;
+          flex-direction: row;
+          height: 70px;
+
+          .cart-icon {
+            color: #cccccc;
+            padding: 18px 0 0 30px;
+          }
+
+          .cart-btn {
+            background-color: darkgoldenrod; /* Green */
+            border: 2px solid darkgoldenrod; /* Green */
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 14px 6px;
+            cursor: pointer;
+            border-radius: 70%;
+          }
+
+          &:hover {
+            color: darkred;
+          }
+        }
+
+        .user-box {
+          display: flex;
+          flex-direction: row;
+
+          .user-ico {
+            color: #cccccc;
+            padding: 18px 0 0 120px;
+          }
+
+          .sign-in-link {
+            padding: 25px 0 0 14px;
+            display: block;
+            text-decoration: none;
+            color: white;
+
+            &:hover {
+              color: darkred;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
