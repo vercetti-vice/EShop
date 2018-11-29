@@ -1,6 +1,6 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 import { Component, ViewEncapsulation, OnInit, OnDestroy, ViewChildren, AfterViewInit, QueryList, ElementRef } from "@angular/core";
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   shouldShowLoginModal: boolean;
   removePrebootScreen: boolean;
   newNotificationCount = 0;
-  appTitle = "Quick Application";
+  appTitle = "EShop";
   appLogo = require("../assets/images/logo-white.png");
 
   stickyToasties: number[] = [];

@@ -48,44 +48,20 @@
             <li routerLinkActive="active"><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span></a></li>
           </ul>
         </div>
-        <div *ngIf="!isUserLoggedIn && router.isActive('/login', false) || false" class="app-component collapse navbar-collapse menuItemsContainer">
-          <ul class="app-component nav navbar-nav nav-pills navBarPadding navbar-right">
-            <li routerLinkActive="active"><a routerLink="/about"><span class="glyphicon glyphicon-info-sign"></span></a></li>
-          </ul>
-        </div>
       </nav>
     </nav>
 
     <div id="pre-bootstrap" *ngIf="!removePrebootScreen" [class.prebootShow.app-component]="!isAppLoaded" class="app-component prebootStep">
       <div class="messaging">
         <h1>
-          Loaded!
+          Загрузилось!
         </h1>
-        <p>
-          QUICK APPLICATION SYSTEM - <span class="appName" style="font-style:italic">quick</span><span class="appName">App</span> &copy; <a href="https://www.ebenmonney.com">WWW.EBENMONNEY.COM</a>
-        </p>
 
       </div>
     </div>
 
     <div id="mainContent" class="app-component">
       <router-outlet></router-outlet>
-    </div>
-
-    <div id="footer">
-      <div class="app-component navbar-fixed-bottom navbar-inner footer">
-        <div class="container">
-          <footer>
-            <div class="app-component vcenter_text center-block">
-              <p class="text-center text-muted">
-                <span class="appName" style="font-style:italic">quick</span><span class="appName">App</span> &copy; {{getYear()}}
-                <a href="https://www.ebenmonney.com" target="_blank">www.ebenmonney.com</a>
-                <!--<span class="small display-none">- Powered by <a href="https://www.ebenmonney.com/quickapp" target="_blank"><span class="appName" style="font-style:italic">quick</span><span class="appName">App</span></a></span>-->
-              </p>
-            </div>
-          </footer>
-        </div>
-      </div>
     </div>
   </div>
 

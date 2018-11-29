@@ -1,0 +1,181 @@
+{
+  "app": {
+    "Welcome": "Добро пожаловать",
+    "Notifications": "Уведомления",
+    "New": "Новый"
+  },
+  "mainMenu": {
+    "Appointments": "Appointments",
+    "Customers": "Покупатели",
+    "Products": "Продукты",
+    "Orders": "Заказы",
+    "About": "О магазине",
+    "Logout": "Выход"
+  },
+  "pageHeader": {
+    "Dashboard": "Личная страница",
+    "Customers": "Покупатели",
+    "Products": "Продукты",
+    "Orders": "Заказы",
+    "NotFound": "Не найдено",
+    "About": "О магазине",
+    "Settings": "Настройки"
+  },
+  "home": {
+    "NoWidgets1": "You have no widgets displayed. Goto",
+    "NoWidgets2": "to configure available widgets",
+    "StatisticsTitle": "Some Important Stuff"
+  },
+  "notFound": {
+    "404": "404",
+    "pageNotFound": "Такой страницы не существует",
+    "backToHome": "Домой"
+  },
+  "settings": {
+    "tab": {
+      "Profile": "Личная страница",
+      "Preferences": "Параметры",
+      "Users": "Пользователя",
+      "Roles": "Роли"
+    },
+    "header": {
+      "UserProfile": "Старница пользователя",
+      "UserPreferences": "Параметры пользователя",
+      "UserDepartments": "User Departments",
+      "UsersManagements": "Users Managements",
+      "RolesManagement": "Roles Management"
+    }
+  },
+  "preferences": {
+    "ReloadPreferences": "Перезагрузить параметры:",
+    "ReloadPreferencesHint": "Load default preferences (local changes are discarded)",
+    "Language": "Язык:",
+    "English": "Английский",
+    "French": "Французский",
+    "German": "Немецкий",
+    "Portuguese": "Португальский",
+    "Arabic": "Арабский",
+    "Korean": "Корейский",
+    "LanguageHint": "Выберите предпочитаемый язык",
+    "HomePage": "Домашняя страница:",
+    "Dashboard": "Dashboard",
+    "Customers": "Покупатели",
+    "Products": "Продукты",
+    "Orders": "Заказы",
+    "About": "О магазине",
+    "Settings": "Настройки",
+    "HomePageHint": "Select the default page to navigate to on login",
+    "Theme": "Theme:",
+    "DefaultColor": "<span class='default-theme-option'>Default</span>",
+    "RedColor": "<span class='red-theme-option'>Red</span>",
+    "OrangeColor": "<span class='orange-theme-option'>Orange</span>",
+    "GreenColor": "<span class='green-theme-option'>Green</span>",
+    "GrayColor": "<span class='gray-theme-option'>Gray</span>",
+    "BlackColor": "<span class='black-theme-option'>Black</span>",
+    "ThemeHint": "Select the default color theme for your account",
+    "DashboardStatistics": "Dashboard Statistics:",
+    "DashboardStatisticsHint": "Show demo graph widget on the dashboard",
+    "DashboardNotifications": "Dashboard Notifications:",
+    "DashboardNotificationsHint": "Show application notifications on the dashboard",
+    "DashboardTodo": "Dashboard Todo:",
+    "DashboardTodoHint": "Shows demo todo widget on the dashboard",
+    "DashboardBanner": "Dashboard Banner:",
+    "DashboardBannerHint": "Show demo information banner widget on the dashboard",
+    "ResetDefault": "Reset default",
+    "SetDefault": "Set as default"
+  },
+  "users": {
+    "management": {
+      "Search": "Search for user...",
+      "NewUser": "New User",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "EditUser": "Edit User \"{{name}}\"",
+      "Title": "Title",
+      "UserName": "User Name",
+      "FullName": "Full Name",
+      "Email": "Email",
+      "Roles": "Roles",
+      "PhoneNumber": "Phone Number"
+    },
+    "editor": {
+      "JobTitle": "Job Title: ",
+      "UserName": "User Name:",
+      "UserNameRequired": "User name is required (minimum of 2 and maximum of 200 characters)",
+      "Password": "Password:",
+      "PasswordHint": "Your password is required when changing user name",
+      "CurrentPasswordRequired": "Current password is required",
+      "Email": "Email:",
+      "EmailRequired": "Email address is required (maximum of 200 characters)",
+      "InvalidEmail": "Specified email is not valid",
+      "ChangePassword": "Change Password",
+      "CurrentPassword": "Current Password:",
+      "NewPassword": "New Password:",
+      "NewPasswordRequired": "New password is required (minimum of 6 characters)",
+      "ConfirmPassword": "Confirm Password:",
+      "ConfirmationPasswordRequired": "Confirmation password is required",
+      "PasswordMismatch": "New password and confirmation password do not match",
+      "Roles": "Roles:",
+      "FullName": " Full Name:",
+      "RoleRequired": " Role is required",
+      "PhoneNumber": "Phone #:",
+      "Enabled": "Enabled",
+      "Unblock": "Unblock",
+      "Close": "Close",
+      "Edit": "Edit",
+      "Cancel": "Cancel",
+      "Save": "Save",
+      "Saving": "Saving..."
+    }
+  },
+  "roles": {
+    "management": {
+      "Search": "Search for role...",
+      "NewRole": "New Role",
+      "Edit": "Edit",
+      "Details": "Details",
+      "Delete": "Delete",
+      "RoleDetails": "Role Details \"{{name}}\"",
+      "EditRole": "Edit Role \"{{name}}\"",
+      "Name": "Name",
+      "Description": "Description",
+      "Users": "Users"
+    },
+    "editor": {
+      "Name": "Name:",
+      "Description": "Description:",
+      "RoleNameRequired": "Role name is required (minimum of 2 and maximum of 200 characters)",
+      "SelectAll": "Select all",
+      "SelectNone": "Select none",
+      "Close": "Close",
+      "Cancel": "Cancel",
+      "Save": "Save",
+      "Saving": "Saving..."
+    }
+  },
+  "notifications": {
+    "Delete": "Delete notification",
+    "Pin": "Pin notification",
+    "Date": "Date",
+    "Notification": "Notification"
+  },
+  "todoDemo": {
+    "management": {
+      "Search": "Search for task...",
+      "HideCompleted": "Hide Completed",
+      "AddTask": "Add Task",
+      "Delete": "Delete task",
+      "Important": "Mark as important",
+      "Task": "Task",
+      "Description": "Description"
+    },
+    "editor": {
+      "NewTask": "New Task",
+      "Name": "Name",
+      "TaskNameRequired": "Task name is required",
+      "Description": "Description",
+      "Important": "Mark as important",
+      "AddTask": "Add Task"
+    }
+  }
+}

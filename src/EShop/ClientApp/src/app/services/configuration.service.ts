@@ -1,7 +1,7 @@
- 
- 
- 
- 
+
+
+
+
 
 import { Injectable } from '@angular/core';
 
@@ -33,14 +33,14 @@ export class ConfigurationService {
     public fallbackBaseUrl = "http://quickapp.ebenmonney.com";
 
     //***Specify default configurations here***
-    public static readonly defaultLanguage: string = "en";
+    public static readonly defaultLanguage: string = "ru";
     public static readonly defaultHomeUrl: string = "/";
     public static readonly defaultTheme: string = "Default";
     public static readonly defaultShowDashboardStatistics: boolean = true;
     public static readonly defaultShowDashboardNotifications: boolean = true;
     public static readonly defaultShowDashboardTodo: boolean = false;
     public static readonly defaultShowDashboardBanner: boolean = true;
-    //***End of defaults***  
+    //***End of defaults***
 
     private _language: string = null;
     private _homeUrl: string = null;
@@ -64,7 +64,7 @@ export class ConfigurationService {
             this.translationService.changeLanguage(this._language);
         }
         else {
-            this.resetLanguage();
+          this.translationService.changeLanguage(this._language);
         }
 
         if (this.localStorage.exists(DBkeys.HOME_URL))

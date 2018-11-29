@@ -40,7 +40,9 @@ namespace EShop
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("EShop"));
+                //options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("EShop"));
+                
+                options.UseInMemoryDatabase();
                 options.UseOpenIddict();
             });
 
