@@ -42,7 +42,7 @@ namespace EShop.Infrastructure.Data
 
       var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-      builder.UseSqlServer(connectionString);
+      builder.UseNpgsql(connectionString);
 
       return new ApplicationDbContext(builder.Options);
     }
