@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EShop.Infrastructure.Migrations
 {
-    public partial class postgreSQLInitial : Migration
+    public partial class postreSQLInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

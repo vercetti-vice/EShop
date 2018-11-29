@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181115060252_postgreSQLInitial")]
-    partial class postgreSQLInitial
+    [Migration("20181129152932_postreSQLInit")]
+    partial class postreSQLInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
