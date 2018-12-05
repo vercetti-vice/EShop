@@ -76,7 +76,8 @@ namespace EShop
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
             });
 
-
+            // AutoMapper
+            services.AddAutoMapper();
 
 
             // Register the OpenIddict services.

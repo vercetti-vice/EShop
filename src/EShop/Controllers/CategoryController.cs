@@ -15,7 +15,7 @@ using Sieve.Services;
 
 namespace EShop.Controllers
 {
-    [Authorize(AuthenticationSchemes = OpenIddictValidationDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = OpenIddictValidationDefaults.AuthenticationScheme)]
     [Route("api/[controller]/[action]")]
     public class CategoryController : Controller
     {
