@@ -209,8 +209,6 @@ namespace DAL.Core
 
         public async Task<bool> TestCanDeleteUserAsync(string userId)
         {
-            if (await _context.Orders.Where(o => o.CashierId == userId).AnyAsync())
-                return false;
 
             //canDelete = !await ; //Do other tests...
 

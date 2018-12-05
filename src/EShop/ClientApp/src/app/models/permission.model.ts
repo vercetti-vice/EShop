@@ -1,11 +1,11 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 export type PermissionNames =
-    "View Users" | "Manage Users" |
-    "View Roles" | "Manage Roles" | "Assign Roles";
+    "Просмотр пользователей" | "Управление пользователями" |
+    "Просмотр ролей" | "Управление ролями" | "Назначение ролей";
 
 export type PermissionValues =
     "users.view" | "users.manage" |
