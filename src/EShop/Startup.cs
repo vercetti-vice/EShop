@@ -20,6 +20,9 @@ using EShop.Helpers;
 using EShop.ViewModels;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using EShop.Helpers.Sieve;
+using Sieve.Models;
+using Sieve.Services;
 using AppPermissions = DAL.Core.ApplicationPermissions;
 
 namespace EShop
@@ -108,6 +111,12 @@ namespace EShop
 
             // Add cors
             services.AddCors();
+
+            // Sieve
+            services.AddScoped<ISieveProcessor, SieveProcessor>();
+            services.AddScoped<ISieveCustomSortMethods, SieveCustomSortMethods>();
+            services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
+            services.Configure<SieveOptions>(Configuration.GetSection("Sieve"));
 
             // Add framework services.
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

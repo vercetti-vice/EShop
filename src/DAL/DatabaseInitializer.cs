@@ -18,15 +18,14 @@ namespace DAL
     }
 
 
-
-
     public class DatabaseInitializer : IDatabaseInitializer
     {
         private readonly ApplicationDbContext _context;
         private readonly IAccountManager _accountManager;
         private readonly ILogger _logger;
 
-        public DatabaseInitializer(ApplicationDbContext context, IAccountManager accountManager, ILogger<DatabaseInitializer> logger)
+        public DatabaseInitializer(ApplicationDbContext context, IAccountManager accountManager,
+            ILogger<DatabaseInitializer> logger)
         {
             _accountManager = accountManager;
             _context = context;
@@ -44,18 +43,20 @@ namespace DAL
                 const string adminRoleName = "administrator";
                 const string userRoleName = "user";
 
-                await EnsureRoleAsync(adminRoleName, "Default administrator", ApplicationPermissions.GetAllPermissionValues());
+                await EnsureRoleAsync(adminRoleName, "Default administrator",
+                    ApplicationPermissions.GetAllPermissionValues());
                 await EnsureRoleAsync(userRoleName, "Default user", new string[] { });
 
-                await CreateUserAsync("admin", "tempP@ss123", "Inbuilt Administrator", "admin@ebenmonney.com", "+1 (123) 000-0000", new string[] { adminRoleName });
-                await CreateUserAsync("user", "tempP@ss123", "Inbuilt Standard User", "user@ebenmonney.com", "+1 (123) 000-0001", new string[] { userRoleName });
+                await CreateUserAsync("admin", "tempP@ss123", "Administrator", "admin@mail.com", "+1 (123) 000-0000",
+                    new string[] {adminRoleName});
+                await CreateUserAsync("user", "tempP@ss123", "Standard User", "user@mail.com", "+1 (123) 000-0001",
+                    new string[] {userRoleName});
 
                 _logger.LogInformation("Inbuilt account generation completed");
             }
 
 
-
-            if (!await _context.Customers.AnyAsync() && !await _context.ProductCategories.AnyAsync())
+            if (!await _context.Customers.AnyAsync())
             {
                 _logger.LogInformation("Seeding initial data");
 
@@ -106,71 +107,21 @@ namespace DAL
                     DateModified = DateTime.UtcNow
                 };
 
+                Brand brand_1 = new Brand("Adidas", "Немецкое качество", "http://adidas.com");
+                Brand brand_2 = new Brand("Microsoft", "Американский Государственный долг", "http://microsoft.com");
+                Brand brand_3 = new Brand("Redmond", "Лучшие мультиварки на планете", "http://redmond.com");
+                Brand brand_4 = new Brand("Xiaomi", "Мы слоамли Китайскую стену", "http://xiaomi.com");
+                Brand brand_5 = new Brand("Hitachi", "Раньше мы делали что-то, а теперь нет", "http://hitachi.com");
 
+                Category category_1 = new Category("Портативная техника", null);
+                Category category_2 = new Category("Смартфоны", 1);
+                Category category_3 = new Category("Плееры", 1);
+                Category category_4 = new Category("Наушники", 1);
+                Category category_5 = new Category("Фото-видео техника", null);
+                Category category_6 = new Category("Фотоаппараты", 5);
+                Category category_7 = new Category("Видеокамеры", 5);
+                Category category_8 = new Category("Экшн-камеры", 5);
 
-                ProductCategory prodCat_1 = new ProductCategory
-                {
-                    Name = "None",
-                    Description = "Default category. Products that have not been assigned a category",
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
-
-
-
-                Product prod_1 = new Product
-                {
-                    Name = "BMW M6",
-                    Description = "Yet another masterpiece from the world's best car manufacturer",
-                    BuyingPrice = 109775,
-                    SellingPrice = 114234,
-                    UnitsInStock = 12,
-                    IsActive = true,
-                    ProductCategory = prodCat_1,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
-
-                Product prod_2 = new Product
-                {
-                    Name = "Nissan Patrol",
-                    Description = "A true man's choice",
-                    BuyingPrice = 78990,
-                    SellingPrice = 86990,
-                    UnitsInStock = 4,
-                    IsActive = true,
-                    ProductCategory = prodCat_1,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
-
-
-
-                Order ordr_1 = new Order
-                {
-                    Discount = 500,
-                    Cashier = await _context.Users.FirstAsync(),
-                    Customer = cust_1,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow,
-                    OrderDetails = new List<OrderDetail>()
-                    {
-                        new OrderDetail() {UnitPrice = prod_1.SellingPrice, Quantity=1, Product = prod_1 },
-                        new OrderDetail() {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
-                    }
-                };
-
-                Order ordr_2 = new Order
-                {
-                    Cashier = await _context.Users.FirstAsync(),
-                    Customer = cust_2,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow,
-                    OrderDetails = new List<OrderDetail>()
-                    {
-                        new OrderDetail() {UnitPrice = prod_2.SellingPrice, Quantity=1, Product = prod_2 },
-                    }
-                };
 
 
                 _context.Customers.Add(cust_1);
@@ -178,18 +129,26 @@ namespace DAL
                 _context.Customers.Add(cust_3);
                 _context.Customers.Add(cust_4);
 
-                _context.Products.Add(prod_1);
-                _context.Products.Add(prod_2);
+                _context.Brands.Add(brand_1);
+                _context.Brands.Add(brand_2);
+                _context.Brands.Add(brand_3);
+                _context.Brands.Add(brand_4);
+                _context.Brands.Add(brand_5);
 
-                _context.Orders.Add(ordr_1);
-                _context.Orders.Add(ordr_2);
+                _context.Categories.Add(category_1);
+                _context.Categories.Add(category_2);
+                _context.Categories.Add(category_3);
+                _context.Categories.Add(category_4);
+                _context.Categories.Add(category_5);
+                _context.Categories.Add(category_6);
+                _context.Categories.Add(category_7);
+                _context.Categories.Add(category_8);
 
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("Seeding initial data completed");
             }
         }
-
 
 
         private async Task EnsureRoleAsync(string roleName, string description, string[] claims)
@@ -201,11 +160,13 @@ namespace DAL
                 var result = await this._accountManager.CreateRoleAsync(applicationRole, claims);
 
                 if (!result.Item1)
-                    throw new Exception($"Seeding \"{description}\" role failed. Errors: {string.Join(Environment.NewLine, result.Item2)}");
+                    throw new Exception(
+                        $"Seeding \"{description}\" role failed. Errors: {string.Join(Environment.NewLine, result.Item2)}");
             }
         }
 
-        private async Task<ApplicationUser> CreateUserAsync(string userName, string password, string fullName, string email, string phoneNumber, string[] roles)
+        private async Task<ApplicationUser> CreateUserAsync(string userName, string password, string fullName,
+            string email, string phoneNumber, string[] roles)
         {
             ApplicationUser applicationUser = new ApplicationUser
             {
@@ -220,7 +181,8 @@ namespace DAL
             var result = await _accountManager.CreateUserAsync(applicationUser, roles, password);
 
             if (!result.Item1)
-                throw new Exception($"Seeding \"{userName}\" user failed. Errors: {string.Join(Environment.NewLine, result.Item2)}");
+                throw new Exception(
+                    $"Seeding \"{userName}\" user failed. Errors: {string.Join(Environment.NewLine, result.Item2)}");
 
 
             return applicationUser;
