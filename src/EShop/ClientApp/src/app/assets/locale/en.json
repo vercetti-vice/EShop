@@ -1,25 +1,26 @@
 {
   "app": {
-    "Welcome": "Welcome",
-    "Notifications": "Notifications",
-    "New": "New"
+    "Welcome": "Добро пожаловать",
+    "Notifications": "Уведомления",
+    "New": "Новое"
   },
   "mainMenu": {
     "Appointments": "Appointments",
-    "Customers": "Customers",
-    "Products": "Products",
-    "Orders": "Orders",
-    "About": "About",
-    "Logout": "Logout"
+    "Customers": "Покупатели",
+    "Products": "Продукты",
+    "Orders": "Заказы",
+    "About": "О магазине",
+    "Logout": "Выход"
   },
   "pageHeader": {
     "Dashboard": "Dashboard",
-    "Customers": "Customers",
-    "Products": "Products",
-    "Orders": "Orders",
-    "NotFound": "Not-Found",
-    "About": "About",
-    "Settings": "Settings"
+    "Customers": "Покупатели",
+    "Products": "Продукты",
+    "Orders": "Заказы",
+    "NotFound": "Не найдено",
+    "About": "О магазине",
+    "Settings": "Настройки",
+    "Catalog": "Каталог"
   },
   "home": {
     "NoWidgets1": "You have no widgets displayed. Goto",
@@ -28,22 +29,22 @@
   },
   "notFound": {
     "404": "404",
-    "pageNotFound": "The page you are looking for does not exist",
-    "backToHome": "Back to home"
+    "pageNotFound": "Искомой страницы не существует",
+    "backToHome": "Назад к каталогу"
   },
   "settings": {
     "tab": {
-      "Profile": "Profile",
-      "Preferences": "Preferences",
-      "Users": "Users",
-      "Roles": "Roles"
+      "Profile": "Профиль",
+      "Preferences": "Параметры",
+      "Users": "Пользователи",
+      "Roles": "Роли"
     },
     "header": {
-      "UserProfile": "User Profile",
-      "UserPreferences": "User Preferences",
+      "UserProfile": "Профиль пользователя",
+      "UserPreferences": "Параметры пользователя",
       "UserDepartments": "User Departments",
-      "UsersManagements": "Users Managements",
-      "RolesManagement": "Roles Management"
+      "UsersManagements": "Управление пользователями",
+      "RolesManagement": "Управление ролями"
     }
   },
   "preferences": {
@@ -86,71 +87,71 @@
   },
   "users": {
     "management": {
-      "Search": "Search for user...",
-      "NewUser": "New User",
-      "Edit": "Edit",
-      "Delete": "Delete",
-      "EditUser": "Edit User \"{{name}}\"",
-      "Title": "Title",
-      "UserName": "User Name",
-      "FullName": "Full Name",
+      "Search": "Поиск пользователя...",
+      "NewUser": "Новый пользователь",
+      "Edit": "Изменить",
+      "Delete": "Удалить",
+      "EditUser": "Изменить пользователя \"{{name}}\"",
+      "Title": "Должность",
+      "UserName": "Имя пользователя",
+      "FullName": "Полное имя",
       "Email": "Email",
-      "Roles": "Roles",
-      "PhoneNumber": "Phone Number"
+      "Roles": "Роли",
+      "PhoneNumber": "Номер телефона"
     },
     "editor": {
-      "JobTitle": "Job Title: ",
-      "UserName": "User Name:",
-      "UserNameRequired": "User name is required (minimum of 2 and maximum of 200 characters)",
-      "Password": "Password:",
-      "PasswordHint": "Your password is required when changing user name",
-      "CurrentPasswordRequired": "Current password is required",
+      "JobTitle": "Должность: ",
+      "UserName": "Имя пользователя:",
+      "UserNameRequired": "Имя пользователя необходимо (От 2 до 200 символов)",
+      "Password": "Пароль:",
+      "PasswordHint": "Необходим пароль, при смене имени пользователя",
+      "CurrentPasswordRequired": "Необходим текущий пароль",
       "Email": "Email:",
-      "EmailRequired": "Email address is required (maximum of 200 characters)",
-      "InvalidEmail": "Specified email is not valid",
-      "ChangePassword": "Change Password",
-      "CurrentPassword": "Current Password:",
-      "NewPassword": "New Password:",
-      "NewPasswordRequired": "New password is required (minimum of 6 characters)",
-      "ConfirmPassword": "Confirm Password:",
-      "ConfirmationPasswordRequired": "Confirmation password is required",
-      "PasswordMismatch": "New password and confirmation password do not match",
-      "Roles": "Roles:",
-      "FullName": " Full Name:",
-      "RoleRequired": " Role is required",
-      "PhoneNumber": "Phone #:",
-      "Enabled": "Enabled",
-      "Unblock": "Unblock",
-      "Close": "Close",
-      "Edit": "Edit",
-      "Cancel": "Cancel",
-      "Save": "Save",
-      "Saving": "Saving..."
+      "EmailRequired": "Email необходим (Максимум 200 символов)",
+      "InvalidEmail": "Данный email неправильный",
+      "ChangePassword": "Изменить пароль",
+      "CurrentPassword": "Текущий пароль:",
+      "NewPassword": "Новый пароль:",
+      "NewPasswordRequired": "Необходим новый пароль (Минимум 6 символов)",
+      "ConfirmPassword": "Подтвердите пароль:",
+      "ConfirmationPasswordRequired": "Необходимо подтверждение пароля",
+      "PasswordMismatch": "Пароли не совпадают",
+      "Roles": "Роли:",
+      "FullName": " Полное имя:",
+      "RoleRequired": " Необходимо назначить роль",
+      "PhoneNumber": "Номер телефона #:",
+      "Enabled": "Включено",
+      "Unblock": "Разблокировать",
+      "Close": "Закрыть",
+      "Edit": "Изменить",
+      "Cancel": "Отмена",
+      "Save": "Сохранить",
+      "Saving": "Сохраняется..."
     }
   },
   "roles": {
     "management": {
-      "Search": "Search for role...",
-      "NewRole": "New Role",
-      "Edit": "Edit",
-      "Details": "Details",
-      "Delete": "Delete",
-      "RoleDetails": "Role Details \"{{name}}\"",
-      "EditRole": "Edit Role \"{{name}}\"",
-      "Name": "Name",
-      "Description": "Description",
-      "Users": "Users"
+      "Search": "Поиск роли...",
+      "NewRole": "Новая роль",
+      "Edit": "Изменить",
+      "Details": "Подробности",
+      "Delete": "Удалить",
+      "RoleDetails": "Подробности роли \"{{name}}\"",
+      "EditRole": "Изменить роль \"{{name}}\"",
+      "Name": "Название",
+      "Description": "Описание",
+      "Users": "Пользователи"
     },
     "editor": {
-      "Name": "Name:",
-      "Description": "Description:",
-      "RoleNameRequired": "Role name is required (minimum of 2 and maximum of 200 characters)",
-      "SelectAll": "Select all",
-      "SelectNone": "Select none",
-      "Close": "Close",
-      "Cancel": "Cancel",
-      "Save": "Save",
-      "Saving": "Saving..."
+      "Name": "Название:",
+      "Description": "Описание:",
+      "RoleNameRequired": "Имя роли обязательно (Минимум 2 символа. Максимум 200 символов)",
+      "SelectAll": "Выбрать все",
+      "SelectNone": "Ничего не выбирать",
+      "Close": "Закрыть",
+      "Cancel": "Отмена",
+      "Save": "Сохранить",
+      "Saving": "Сохранение..."
     }
   },
   "notifications": {

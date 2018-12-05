@@ -24,7 +24,7 @@
         <p class="form-control-static">{{user.jobTitle}}</p>
       </div>
       <div *ngIf="isEditMode" [class.col-md-9]="isViewOnly" [class.col-md-10]="!isViewOnly">
-        <input autofocus type="text" attr.id="jobTitle-{{uniqueId}}" name="jobTitle" placeholder="Enter Job Title" class="form-control" [(ngModel)]="userEdit.jobTitle" />
+        <input autofocus type="text" attr.id="jobTitle-{{uniqueId}}" name="jobTitle" placeholder="Введите должность" class="form-control" [(ngModel)]="userEdit.jobTitle" />
       </div>
     </div>
 
@@ -40,7 +40,7 @@
         <p class="form-control-static">{{user.userName}}</p>
       </div>
       <div *ngIf="isEditMode" [class.col-md-9]="isViewOnly" [class.col-md-10]="!isViewOnly" [ngClass]="{'has-success': f.submitted && userName.valid, 'has-error' : f.submitted && !userName.valid}">
-        <input type="text" attr.id="userName-{{uniqueId}}" name="userName" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Enter user name"
+        <input type="text" attr.id="userName-{{uniqueId}}" name="userName" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Введите имя пользователя"
                class="form-control" [(ngModel)]="userEdit.userName" #userName="ngModel" required minlength="2" maxlength="200" />
         <span *ngIf="showValidationErrors && f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': userName.valid, 'glyphicon-remove' : !userName.valid}"></span>
         <span *ngIf="showValidationErrors && f.submitted && !userName.valid" class="errorMessage">
@@ -57,7 +57,7 @@
     <div *ngIf="isEditMode && isEditingSelf && !isChangePassword && user.userName != userEdit.userName" class="form-group has-feedback">
       <label class="control-label col-md-2" for="userPassword-{{uniqueId}}">{{'users.editor.Password' | translate}}</label>
       <div class="col-md-10" [ngClass]="{'has-success': f.submitted && userPassword.valid, 'has-error' : f.submitted && !userPassword.valid}">
-        <input type="password" attr.id="userPassword-{{uniqueId}}" name="userPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Enter password"
+        <input type="password" attr.id="userPassword-{{uniqueId}}" name="userPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Введите пароль"
                class="form-control" [(ngModel)]="userEdit.currentPassword" #userPassword="ngModel" required />
         <small class="hint-sm">{{'users.editor.PasswordHint' | translate}}</small>
         <span *ngIf="showValidationErrors && f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': userPassword.valid, 'glyphicon-remove' : !userPassword.valid}"></span>
@@ -80,7 +80,7 @@
         <p class="form-control-static">{{user.email}}</p>
       </div>
       <div *ngIf="isEditMode" [class.col-md-9]="isViewOnly" [class.col-md-10]="!isViewOnly" [ngClass]="{'has-success': f.submitted && email.valid, 'has-error' : f.submitted && !email.valid}">
-        <input type="text" attr.id="email-{{uniqueId}}" name="email" placeholder="Enter email address" class="form-control" [(ngModel)]="userEdit.email" #email="ngModel"
+        <input type="text" attr.id="email-{{uniqueId}}" name="email" placeholder="Введите email адрес" class="form-control" [(ngModel)]="userEdit.email" #email="ngModel"
                required maxlength="200" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" />
         <span *ngIf="showValidationErrors && f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': email.valid, 'glyphicon-remove' : !email.valid}"></span>
         <span *ngIf="showValidationErrors && f.submitted && email.errors?.required" class="errorMessage">
@@ -109,7 +109,7 @@
           <div *ngIf="isEditingSelf" class="form-group has-feedback">
             <label class="control-label col-md-3" for="currentPassword-{{uniqueId}}">{{'users.editor.CurrentPassword' | translate}}</label>
             <div class="col-md-9" [ngClass]="{'has-success': f.submitted && currentPassword.valid, 'has-error' : f.submitted && !currentPassword.valid}">
-              <input type="password" attr.id="currentPassword-{{uniqueId}}" name="currentPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Enter current password" class="form-control" [(ngModel)]="userEdit.currentPassword" #currentPassword="ngModel"
+              <input type="password" attr.id="currentPassword-{{uniqueId}}" name="currentPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Введите текущий пароль" class="form-control" [(ngModel)]="userEdit.currentPassword" #currentPassword="ngModel"
                      required />
               <span *ngIf="showValidationErrors && f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': currentPassword.valid, 'glyphicon-remove' : !currentPassword.valid}"></span>
               <span *ngIf="showValidationErrors && f.submitted && !currentPassword.valid" class="errorMessage">
@@ -127,7 +127,7 @@
           <div class="form-group has-feedback">
             <label class="control-label col-md-3" for="newPassword-{{uniqueId}}">{{'users.editor.NewPassword' | translate}}</label>
             <div class="col-md-9" [ngClass]="{'has-success': f.submitted && newPassword.valid, 'has-error' : f.submitted && !newPassword.valid}">
-              <input type="password" attr.id="newPassword-{{uniqueId}}" name="newPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Enter new password" class="form-control" [(ngModel)]="userEdit.newPassword" #newPassword="ngModel"
+              <input type="password" attr.id="newPassword-{{uniqueId}}" name="newPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Введите новый пароль" class="form-control" [(ngModel)]="userEdit.newPassword" #newPassword="ngModel"
                      required minlength="6" validateEqual="confirmPassword" reverse="true" />
               <span *ngIf="showValidationErrors && f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': newPassword.valid, 'glyphicon-remove' : !newPassword.valid}"></span>
               <span *ngIf="showValidationErrors && f.submitted && !newPassword.valid" class="errorMessage">
@@ -145,7 +145,7 @@
           <div class="form-group has-feedback">
             <label class="control-label col-md-3" for="confirmPassword-{{uniqueId}}">{{'users.editor.ConfirmPassword' | translate}}</label>
             <div class="col-md-9" [ngClass]="{'has-success': f.submitted && confirmPassword.valid, 'has-error' : f.submitted && !confirmPassword.valid}">
-              <input type="password" attr.id="confirmPassword-{{uniqueId}}" name="confirmPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Confirm new password" class="form-control" [(ngModel)]="userEdit.confirmPassword" #confirmPassword="ngModel"
+              <input type="password" attr.id="confirmPassword-{{uniqueId}}" name="confirmPassword" [attr.autocomplete]="isGeneralEditor ? new-password : null" placeholder="Введите новый пароль ещё раз" class="form-control" [(ngModel)]="userEdit.confirmPassword" #confirmPassword="ngModel"
                      required validateEqual="newPassword" />
               <span *ngIf="showValidationErrors && f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': confirmPassword.valid, 'glyphicon-remove' : !confirmPassword.valid}"></span>
               <span *ngIf="showValidationErrors && f.submitted && confirmPassword.errors?.required" class="errorMessage">
@@ -179,7 +179,7 @@
       </div>
       <div *ngIf="isEditMode && canAssignRoles" [class.col-md-9]="isViewOnly" [class.col-md-10]="!isViewOnly" [ngClass]="{'has-success': f.submitted && roles.valid, 'has-error' : f.submitted && !roles.valid}">
         <select id="roles-user-info" name="roles" [(ngModel)]="userEdit.roles" #roles="ngModel" #rolesSelector="bootstrap-select" class="selectpicker form-control" bootstrapSelect required multiple
-                data-live-search="true" data-actions-box="false" data-live-search-placeholder="Search..." title="Select Roles">
+                data-live-search="true" data-actions-box="false" data-live-search-placeholder="Поиск..." title="Выберите роли">
           <option *ngFor="let role of allRoles" attr.data-content="<span title='{{role.description}}' class='badge'>{{role.name}}</span>" attr.value="{{role.name}}">
             {{role.name}}
           </option>
@@ -205,7 +205,7 @@
         <p class="form-control-static">{{user.fullName}}</p>
       </div>
       <div *ngIf="isEditMode" [class.col-md-9]="isViewOnly" [class.col-md-10]="!isViewOnly">
-        <input type="text" attr.id="fullName-{{uniqueId}}" name="fullName" placeholder="Enter full name" class="form-control" [(ngModel)]="userEdit.fullName" />
+        <input type="text" attr.id="fullName-{{uniqueId}}" name="fullName" placeholder="Введите полное имя" class="form-control" [(ngModel)]="userEdit.fullName" />
       </div>
     </div>
 
@@ -221,7 +221,7 @@
         <p class="form-control-static">{{user.phoneNumber}}</p>
       </div>
       <div *ngIf="isEditMode" [class.col-md-9]="isViewOnly" [class.col-md-10]="!isViewOnly">
-        <input type="text" attr.id="phoneNumber-{{uniqueId}}" name="phoneNumber" placeholder="Enter phone number" class="form-control" [(ngModel)]="userEdit.phoneNumber" />
+        <input type="text" attr.id="phoneNumber-{{uniqueId}}" name="phoneNumber" placeholder="Введите номер телефона" class="form-control" [(ngModel)]="userEdit.phoneNumber" />
       </div>
     </div>
 

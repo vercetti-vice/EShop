@@ -9,9 +9,6 @@
         <li class="active">
           <a id="profileTab" [routerLink]="[]" fragment="profile" href="#profile" data-toggle="tab"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i> {{'settings.tab.Profile' | translate}}</a>
         </li>
-        <li>
-          <a id="preferencesTab" [routerLink]="[]" fragment="preferences" href="#preferences" data-toggle="tab"><i class="fa fa-sliders fa-fw" aria-hidden="true"></i> {{'settings.tab.Preferences' | translate}}</a>
-        </li>
         <li [hidden]="!canViewUsers">
           <a id="usersTab" [routerLink]="[]" fragment="users" href="#users" data-toggle="tab"><i class="fa fa-users fa-fw" aria-hidden="true"></i> {{'settings.tab.Users' | translate}}</a>
         </li>
@@ -27,14 +24,6 @@
           <hr class="separator-hr" />
           <div [@fadeInOut] *ngIf="isProfileActivated" class="content-container">
             <user-info></user-info>
-          </div>
-        </div>
-
-        <div class="tab-pane" id="preferences">
-          <h4>{{'settings.header.UserPreferences' | translate}}</h4>
-          <hr class="separator-hr" />
-          <div [@fadeInOut] *ngIf="isPreferencesActivated" class="content-container">
-            <user-preferences></user-preferences>
           </div>
         </div>
 
