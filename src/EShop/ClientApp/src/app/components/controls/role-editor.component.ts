@@ -1,6 +1,6 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 import { Component, ViewChild } from '@angular/core';
@@ -50,7 +50,7 @@ export class RoleEditorComponent {
 
     private save() {
         this.isSaving = true;
-        this.alertService.startLoadingMessage("Saving changes...");
+        this.alertService.startLoadingMessage("Сохранение изменений...");
 
         this.roleEdit.permissions = this.getSelectedPermissions();
 
@@ -74,9 +74,9 @@ export class RoleEditorComponent {
         this.showValidationErrors = false;
 
         if (this.isNewRole)
-            this.alertService.showMessage("Success", `Role \"${this.roleEdit.name}\" was created successfully`, MessageSeverity.success);
+            this.alertService.showMessage("Успех", `Роль \"${this.roleEdit.name}\" было успешно создана`, MessageSeverity.success);
         else
-            this.alertService.showMessage("Success", `Changes to role \"${this.roleEdit.name}\" was saved successfully`, MessageSeverity.success);
+            this.alertService.showMessage("Успех", `Изменения в роли \"${this.roleEdit.name}\" были успешно сохранены`, MessageSeverity.success);
 
 
         this.roleEdit = new Role();
@@ -105,7 +105,7 @@ export class RoleEditorComponent {
     private saveFailedHelper(error: any) {
         this.isSaving = false;
         this.alertService.stopLoadingMessage();
-        this.alertService.showStickyMessage("Save Error", "The below errors occured whilst saving your changes:", MessageSeverity.error, error);
+        this.alertService.showStickyMessage("Ошибка сохранения", "The below errors occured whilst saving your changes:", MessageSeverity.error, error);
         this.alertService.showStickyMessage(error, null, MessageSeverity.error);
 
         if (this.changesFailedCallback)
@@ -119,7 +119,7 @@ export class RoleEditorComponent {
         this.showValidationErrors = false;
         this.resetForm();
 
-        this.alertService.showMessage("Cancelled", "Operation cancelled by user", MessageSeverity.default);
+        this.alertService.showMessage("Отмена", "Действие отменено пользователем", MessageSeverity.default);
         this.alertService.resetStickyMessage();
 
         if (this.changesCancelledCallback)

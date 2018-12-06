@@ -4,7 +4,46 @@
     </header>
 
     <div [@fadeInOut]>
+      <div class="col-sm-2 side-menu">
+        <ul bootstrapTab #tab="bootstrap-tab" class="nav nav-tabs tabs-left" (showBSTab)="onShowTab($event)">
+          <li class="active">
+            <a id="brandTab" [routerLink]="[]" fragment="brands" href="#brands" data-toggle="tab"><i class="fa fa-spotify" aria-hidden="true"></i> {{'home.tab.Brands' | translate}}</a>
+          </li>
+          <li [hidden]="!canViewUsers">
+            <a id="categoryTab" [routerLink]="[]" fragment="categories" href="#catgories" data-toggle="tab"><i class="fa fa-stack-exchange" aria-hidden="true"></i> {{'home.tab.Categories' | translate}}</a>
+          </li>
+          <li [hidden]="!canViewRoles">
+            <a id="productTab" [routerLink]="[]" fragment="products" href="#products" data-toggle="tab"><i class="fa fa-paypal" aria-hidden="true"></i> {{'home.tab.Products' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-10">
+        <div class="tab-content">
+          <div class="tab-pane active" id="brands">
+            <h4>{{'home.header.Brands' | translate}}</h4>
+            <hr class="separator-hr" />
+            <div [@fadeInOut] *ngIf="isBrandActivated" class="content-container">
 
+            </div>
+          </div>
 
+          <div class="tab-pane" id="categories">
+            <h4>{{'home.header.Categories' | translate}}</h4>
+            <hr class="separator-hr" />
+            <div [@fadeInOut] *ngIf="canViewUsers && isCategoryActivated" class="content-container">
+
+            </div>
+          </div>
+
+          <div class="tab-pane" id="products">
+            <h4>{{'home.header.Products' | translate}}</h4>
+            <hr class="separator-hr" />
+            <div [@fadeInOut] *ngIf="canViewRoles && isProductActivated" class="content-container">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 </div>

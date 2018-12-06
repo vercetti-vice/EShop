@@ -1,6 +1,6 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 import { Component, OnInit, OnDestroy, Input } from "@angular/core";
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.isLoading = true;
-    this.alertService.startLoadingMessage("", "Attempting login...");
+    this.alertService.startLoadingMessage("", "Осуществляется вход...");
 
     this.authService.login(this.userLogin.email, this.userLogin.password, this.userLogin.rememberMe)
       .subscribe(
@@ -86,12 +86,12 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.reset();
 
             if (!this.isModal) {
-              this.alertService.showMessage("Login", `Welcome ${user.userName}!`, MessageSeverity.success);
+              this.alertService.showMessage("Вход", `Добро пожаловать ${user.userName}!`, MessageSeverity.success);
             }
             else {
-              this.alertService.showMessage("Login", `Session for ${user.userName} restored!`, MessageSeverity.success);
+              this.alertService.showMessage("Вход", `Сессия для ${user.userName} восстановлена!`, MessageSeverity.success);
               setTimeout(() => {
-                this.alertService.showStickyMessage("Session Restored", "Please try your last operation again", MessageSeverity.default);
+                this.alertService.showStickyMessage("Сессия восстановлена", "Please try your last operation again", MessageSeverity.default);
               }, 500);
 
               this.closeModal();
@@ -110,9 +110,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             let errorMessage = Utilities.findHttpResponseMessage("error_description", error);
 
             if (errorMessage)
-              this.alertService.showStickyMessage("Unable to login", errorMessage, MessageSeverity.error, error);
+              this.alertService.showStickyMessage("Невозможно войти", errorMessage, MessageSeverity.error, error);
             else
-              this.alertService.showStickyMessage("Unable to login", "An error occured whilst logging in, please try again later.\nError: " + Utilities.getResponseBody(error), MessageSeverity.error, error);
+              this.alertService.showStickyMessage("Невозможно войти", "An error occured whilst logging in, please try again later.\nError: " + Utilities.getResponseBody(error), MessageSeverity.error, error);
           }
 
           setTimeout(() => {
@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         DialogType.prompt,
         (value: string) => {
           this.configurations.baseUrl = value;
-          this.alertService.showStickyMessage("API Changed!", "The target Web API has been changed to: " + value, MessageSeverity.warn);
+          this.alertService.showStickyMessage("API изменилось!", "Целевая API изменилась на: " + value, MessageSeverity.warn);
         },
         null,
         null,

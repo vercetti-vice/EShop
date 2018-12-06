@@ -5,11 +5,13 @@
 
 export type PermissionNames =
     "Просмотр пользователей" | "Управление пользователями" |
-    "Просмотр ролей" | "Управление ролями" | "Назначение ролей";
+    "Просмотр ролей" | "Управление ролями" | "Назначение ролей" |
+    "Просмотр продуктов" | "Управление продуктами";
 
 export type PermissionValues =
     "users.view" | "users.manage" |
-    "roles.view" | "roles.manage" | "roles.assign";
+    "roles.view" | "roles.manage" | "roles.assign" |
+    "products.view" | "products.manage";
 
 export class Permission {
 
@@ -20,6 +22,8 @@ export class Permission {
     public static readonly manageRolesPermission: PermissionValues = "roles.manage";
     public static readonly assignRolesPermission: PermissionValues = "roles.assign";
 
+    public static readonly viewProductsPermission: PermissionValues = "products.view";
+    public static readonly manageProductsPermission: PermissionValues = "products.manage";
 
     constructor(name?: PermissionNames, value?: PermissionValues, groupName?: string, description?: string) {
         this.name = name;
@@ -33,3 +37,5 @@ export class Permission {
     public groupName: string;
     public description: string;
 }
+
+

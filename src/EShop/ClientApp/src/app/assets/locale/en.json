@@ -47,6 +47,18 @@
       "RolesManagement": "Управление ролями"
     }
   },
+  "home": {
+    "tab": {
+      "Categories": "Категории",
+      "Brands": "Бренды",
+      "Products": "Товары"
+    },
+    "header": {
+      "Categories": "Категории",
+      "Brands": "Бренды",
+      "Products": "Товары"
+    }
+  },
   "preferences": {
     "ReloadPreferences": "Reload Preferences:",
     "ReloadPreferencesHint": "Load default preferences (local changes are discarded)",
