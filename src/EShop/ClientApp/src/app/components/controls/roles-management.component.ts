@@ -1,6 +1,6 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 import { Component, OnInit, AfterViewInit, TemplateRef, ViewChild, Input } from '@angular/core';
@@ -145,7 +145,7 @@ export class RolesManagementComponent implements OnInit, AfterViewInit {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
 
-                this.alertService.showStickyMessage("Load Error", `Unable to retrieve roles from the server.\r\nErrors: "${Utilities.getHttpResponseMessage(error)}"`,
+                this.alertService.showStickyMessage("Ошибка загрузки", `Unable to retrieve roles from the server.\r\nErrors: "${Utilities.getHttpResponseMessage(error)}"`,
                     MessageSeverity.error, error);
             });
     }
@@ -184,7 +184,7 @@ export class RolesManagementComponent implements OnInit, AfterViewInit {
 
     deleteRoleHelper(row: Role) {
 
-        this.alertService.startLoadingMessage("Deleting...");
+        this.alertService.startLoadingMessage("Удаление...");
         this.loadingIndicator = true;
 
         this.accountService.deleteRole(row)
@@ -199,7 +199,7 @@ export class RolesManagementComponent implements OnInit, AfterViewInit {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
 
-                this.alertService.showStickyMessage("Delete Error", `An error occured whilst deleting the role.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
+                this.alertService.showStickyMessage("Ошибка удаления", `An error occured whilst deleting the role.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
                     MessageSeverity.error, error);
             });
     }
