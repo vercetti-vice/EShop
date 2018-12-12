@@ -1,11 +1,11 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 import { NgModule, ErrorHandler } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -71,6 +71,9 @@ import { CategoryInfoComponent } from './components/categories/category-info/cat
 import { ProductInfoComponent } from './components/goods/product-info/product-info.component';
 import { ProductManagmentComponent } from './components/goods/product-managment/product-managment.component';
 import { ProductEditorComponent } from './components/goods/product-editor/product-editor.component';
+import {BrandService} from './services/brand.service';
+import {CategoryService} from './services/category.service';
+import {ProductService} from './services/product.service';
 
 
 
@@ -80,6 +83,7 @@ import { ProductEditorComponent } from './components/goods/product-editor/produc
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     TranslateModule.forRoot({
@@ -142,7 +146,10 @@ import { ProductEditorComponent } from './components/goods/product-editor/produc
     AccountService,
     AccountEndpoint,
     LocalStoreManager,
-    EndpointFactory
+    EndpointFactory,
+    BrandService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

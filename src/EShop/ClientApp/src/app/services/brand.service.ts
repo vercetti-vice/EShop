@@ -17,22 +17,22 @@ export class BrandService {
   constructor(private http: HttpClient, private configurations: ConfigurationService, injector: Injector) { }
 
   getAll(sorts: string, filters: string, page: number, pageSize: number) {
-    return this.http.get<Brand[]>(`${this.configurations.baseUrl}/brand/GetAll?sorts=` + sorts + `&filters=` + filters + `&page=` + page + `&pageSize=` + pageSize);
+    return this.http.get<Brand[]>(`${this.configurations.baseUrl}/api/brand/GetAll?sorts=` + sorts + `&filters=` + filters + `&page=` + page + `&pageSize=` + pageSize);
   }
 
   getById(id: number) {
-    return this.http.get<Brand>(`${this.configurations.baseUrl}/brand/GetById?id=` + id);
+    return this.http.get<Brand>(`${this.configurations.baseUrl}/api/brand/GetById?id=` + id);
   }
 
   create(brand: Brand) {
-    return this.http.post(`${this.configurations.baseUrl}/brand/Create`, brand, httpOptions);
+    return this.http.post(`${this.configurations.baseUrl}/api/brand/Create`, brand, httpOptions);
   }
 
   update(brand: Brand) {
-    return this.http.put(`${this.configurations.baseUrl}/brand/Update`, brand);
+    return this.http.put(`${this.configurations.baseUrl}/api/brand/Update`, brand);
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.configurations.baseUrl}/brand/Delete?id=` + id);
+    return this.http.delete(`${this.configurations.baseUrl}/api/brand/Delete?id=` + id);
   }
 }

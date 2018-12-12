@@ -23,23 +23,23 @@
             <h4>{{'home.header.Brands' | translate}}</h4>
             <hr class="separator-hr" />
             <div [@fadeInOut] *ngIf="isBrandActivated" class="content-container">
-
+              <app-brand-managment></app-brand-managment>
             </div>
           </div>
 
           <div class="tab-pane" id="categories">
             <h4>{{'home.header.Categories' | translate}}</h4>
             <hr class="separator-hr" />
-            <div [@fadeInOut] *ngIf="canViewUsers && isCategoryActivated" class="content-container">
-
+            <div [@fadeInOut] *ngIf="isCategoryActivated" class="content-container">
+              <app-category-managment></app-category-managment>
             </div>
           </div>
 
           <div class="tab-pane" id="products">
             <h4>{{'home.header.Products' | translate}}</h4>
             <hr class="separator-hr" />
-            <div [@fadeInOut] *ngIf="canViewRoles && isProductActivated" class="content-container">
-
+            <div [@fadeInOut] *ngIf="isProductActivated" class="content-container">
+              <app-product-managment></app-product-managment>
             </div>
           </div>
         </div>

@@ -1,3 +1,22 @@
-<p>
-  category-managment works!
-</p>
+<div class="container">
+  <h3>Все категории:</h3>
+  <table class="table-style-two" border="1" sortable-table>
+    <thead>
+    <tr>
+      <th sort-direction="Name" (click)="sort()">Имя категории</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{category.name}}</td>
+      <td><button (click)="deleteCategory(category.id)" class="btn btn-danger">Удалить</button></td>
+      <td><button [routerLink]="['/category-edit/' + category.id]" class="btn btn-success">Изменить</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+  <a class="button15" *ngIf="page > 1" (click)="previousPage()">Предыдущая</a>
+  <a class="button15" (click)="nextPage()" *ngIf="nextIsActive">Следующая</a>
+</div>
