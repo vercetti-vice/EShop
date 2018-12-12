@@ -62,6 +62,15 @@ import { UserPreferencesComponent } from "./components/controls/user-preferences
 import { UsersManagementComponent } from "./components/controls/users-management.component";
 import { RolesManagementComponent } from "./components/controls/roles-management.component";
 import { RoleEditorComponent } from "./components/controls/role-editor.component";
+import { BrandManagmentComponent } from './components/brands/brand-managment/brand-managment.component';
+import { BrandEditorComponent } from './components/brands/brand-editor/brand-editor.component';
+import { BrandInfoComponent } from './components/brands/brand-info/brand-info.component';
+import { CategoryManagmentComponent } from './components/categories/category-managment/category-managment.component';
+import { CategoryEditorComponent } from './components/categories/category-editor/category-editor.component';
+import { CategoryInfoComponent } from './components/categories/category-info/category-info.component';
+import { ProductInfoComponent } from './components/goods/product-info/product-info.component';
+import { ProductManagmentComponent } from './components/goods/product-managment/product-managment.component';
+import { ProductEditorComponent } from './components/goods/product-editor/product-editor.component';
 
 
 
@@ -110,7 +119,16 @@ import { RoleEditorComponent } from "./components/controls/role-editor.component
     BootstrapToggleDirective,
     BootstrapSelectDirective,
     BootstrapDatepickerDirective,
-    GroupByPipe
+    GroupByPipe,
+    BrandManagmentComponent,
+    BrandEditorComponent,
+    BrandInfoComponent,
+    CategoryManagmentComponent,
+    CategoryEditorComponent,
+    CategoryInfoComponent,
+    ProductInfoComponent,
+    ProductManagmentComponent,
+    ProductEditorComponent
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },

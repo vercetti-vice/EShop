@@ -12,14 +12,14 @@ namespace DAL.Core
         public static ReadOnlyCollection<ApplicationPermission> AllPermissions;
 
 
-        public const string UsersPermissionGroupName = "User Permissions";
-        public static ApplicationPermission ViewUsers = new ApplicationPermission("View Users", "users.view", UsersPermissionGroupName, "Permission to view other users account details");
-        public static ApplicationPermission ManageUsers = new ApplicationPermission("Manage Users", "users.manage", UsersPermissionGroupName, "Permission to create, delete and modify other users account details");
+        public const string UsersPermissionGroupName = "Права над пользователями";
+        public static ApplicationPermission ViewUsers = new ApplicationPermission("Просмотр пользователей", "users.view", UsersPermissionGroupName, "Права на просмотр профилей других пользователй");
+        public static ApplicationPermission ManageUsers = new ApplicationPermission("Управление пользователями", "users.manage", UsersPermissionGroupName, "Права на создание, удаление и изменение профилей других пользователей");
 
-        public const string RolesPermissionGroupName = "Role Permissions";
-        public static ApplicationPermission ViewRoles = new ApplicationPermission("View Roles", "roles.view", RolesPermissionGroupName, "Permission to view available roles");
-        public static ApplicationPermission ManageRoles = new ApplicationPermission("Manage Roles", "roles.manage", RolesPermissionGroupName, "Permission to create, delete and modify roles");
-        public static ApplicationPermission AssignRoles = new ApplicationPermission("Assign Roles", "roles.assign", RolesPermissionGroupName, "Permission to assign roles to users");
+        public const string RolesPermissionGroupName = "Права над ролями";
+        public static ApplicationPermission ViewRoles = new ApplicationPermission("Просмотр ролей", "roles.view", RolesPermissionGroupName, "Права на просмотр доступных ролей");
+        public static ApplicationPermission ManageRoles = new ApplicationPermission("Управление ролями", "roles.manage", RolesPermissionGroupName, "Права на создание, удаление и изменение ролей");
+        public static ApplicationPermission AssignRoles = new ApplicationPermission("Назначение ролей", "roles.assign", RolesPermissionGroupName, "Права на назначение ролей пользователям");
 
 
         static ApplicationPermissions()

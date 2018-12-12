@@ -178,7 +178,7 @@ export class RolesManagementComponent implements OnInit, AfterViewInit {
     }
 
     deleteRole(row: Role) {
-        this.alertService.showDialog('Are you sure you want to delete the \"' + row.name + '\" role?', DialogType.confirm, () => this.deleteRoleHelper(row));
+        this.alertService.showDialog('Вы уверены, что хотите удалить роль \"' + row.name + '\"?', DialogType.confirm, () => this.deleteRoleHelper(row));
     }
 
 

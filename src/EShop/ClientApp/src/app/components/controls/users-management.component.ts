@@ -1,6 +1,6 @@
 // ====================================================
- 
- 
+
+
 // ====================================================
 
 import { Component, OnInit, AfterViewInit, TemplateRef, ViewChild, Input } from '@angular/core';
@@ -191,13 +191,13 @@ export class UsersManagementComponent implements OnInit, AfterViewInit {
 
 
     deleteUser(row: UserEdit) {
-        this.alertService.showDialog('Are you sure you want to delete \"' + row.userName + '\"?', DialogType.confirm, () => this.deleteUserHelper(row));
+        this.alertService.showDialog('Вы уверены, что хотите удалить \"' + row.userName + '\"?', DialogType.confirm, () => this.deleteUserHelper(row));
     }
 
 
     deleteUserHelper(row: UserEdit) {
 
-        this.alertService.startLoadingMessage("Deleting...");
+        this.alertService.startLoadingMessage("Удаление...");
         this.loadingIndicator = true;
 
         this.accountService.deleteUser(row)
@@ -212,7 +212,7 @@ export class UsersManagementComponent implements OnInit, AfterViewInit {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
 
-                this.alertService.showStickyMessage("Delete Error", `An error occured whilst deleting the user.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
+                this.alertService.showStickyMessage("Ошибка при удалении", `An error occured whilst deleting the user.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
                     MessageSeverity.error, error);
             });
     }
