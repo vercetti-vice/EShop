@@ -17,6 +17,8 @@
     </tbody>
   </table>
   <br>
+  <button [routerLink]="['/category-create']" class="btn btn-active">Новая категория</button>
+  <br>
   <a class="button15" *ngIf="page > 1" (click)="previousPage()">Предыдущая</a>
   <a class="button15" (click)="nextPage()" *ngIf="nextIsActive">Следующая</a>
 </div>

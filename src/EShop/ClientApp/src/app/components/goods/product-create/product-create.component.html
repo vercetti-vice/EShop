@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <h2>Создание товара</h2>
+      <form [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Название</label>
+          <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Название обязательно</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="brandId">Бренд:</label>
+          <select class="form-control" formControlName="brandId" name="brandId" [ngClass]="{ 'is-invalid': submitted && f.parentCategoryId.errors }">
+            <option></option>
+            <ng-container *ngFor="let brand of brands">
+              <option [value]="brand.id">
+                {{ brand.name }}
+              </option>
+            </ng-container>
+          </select>
+          <div *ngIf="submitted && f.brandId.errors" class="invalid-feedback">
+            <div *ngIf="f.brandId.errors.required">Бренд обязателен</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="categoryId">Категория:</label>
+          <select class="form-control" formControlName="categoryId" name="categoryId" [ngClass]="{ 'is-invalid': submitted && f.parentCategoryId.errors }">
+            <option></option>
+            <ng-container *ngFor="let category of categories">
+              <option [value]="category.id">
+                {{ category.name }}
+              </option>
+            </ng-container>
+          </select>
+          <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+            <div *ngIf="f.categoryId.errors.required">Бренд обязателен</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Описание</label>
+          <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+          <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+            <div *ngIf="f.description.errors.required">Описание обязательно</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Цена</label>
+          <input type="text" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+          <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+            <div *ngIf="f.price.errors.required">Цена обязательна</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Ссылка на изображение</label>
+          <input type="text" formControlName="imageUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.imageUrl.errors }" />
+          <div *ngIf="submitted && f.imageUrl.errors" class="invalid-feedback">
+            <div *ngIf="f.imageUrl.errors.required">Ссылка на изображение обязательна</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">Создать</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <a [routerLink]="['/category-list']" class="btn btn-link">Отмена</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

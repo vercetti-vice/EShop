@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Core;
 using DAL.Core.Interfaces;
+using Product = DAL.Models.Product;
 
 namespace DAL
 {
@@ -112,6 +113,8 @@ namespace DAL
                 Brand brand_3 = new Brand("Redmond", "Лучшие мультиварки на планете", "http://redmond.com");
                 Brand brand_4 = new Brand("Xiaomi", "Мы слоамли Китайскую стену", "http://xiaomi.com");
                 Brand brand_5 = new Brand("Hitachi", "Раньше мы делали что-то, а теперь нет", "http://hitachi.com");
+                Brand brand_6 = new Brand("Apple", "Самая крупная американская компания", "http://apple.com");
+                Brand brand_7 = new Brand("Canon", "Фотоаппараты? Это к ним", "http://canon.com");
 
                 Category category_1 = new Category("Портативная техника", null);
                 Category category_2 = new Category("Смартфоны", 1);
@@ -122,7 +125,10 @@ namespace DAL
                 Category category_7 = new Category("Видеокамеры", 5);
                 Category category_8 = new Category("Экшн-камеры", 5);
 
-
+                Product product_1 = new Product("iPhone X", 2, 6, 20000,
+                    "Самый инновационный смартфон на данный момент", "http://iphonex.com");
+                Product product_2 = new Product("Canon 50D", 6, 7, 25000,
+                    "Надёжный фотоаппарат на века", "http://canon50D.com");
 
                 _context.Customers.Add(cust_1);
                 _context.Customers.Add(cust_2);
@@ -134,6 +140,8 @@ namespace DAL
                 _context.Brands.Add(brand_3);
                 _context.Brands.Add(brand_4);
                 _context.Brands.Add(brand_5);
+                _context.Brands.Add(brand_6);
+                _context.Brands.Add(brand_7);
 
                 _context.Categories.Add(category_1);
                 _context.Categories.Add(category_2);
@@ -143,6 +151,9 @@ namespace DAL
                 _context.Categories.Add(category_6);
                 _context.Categories.Add(category_7);
                 _context.Categories.Add(category_8);
+
+                _context.Products.Add(product_1);
+                _context.Products.Add(product_2);
 
                 await _context.SaveChangesAsync();
 

@@ -22,6 +22,12 @@ import {BrandInfoComponent} from './components/brands/brand-info/brand-info.comp
 import {CategoryManagmentComponent} from './components/categories/category-managment/category-managment.component';
 import {CategoryInfoComponent} from './components/categories/category-info/category-info.component';
 import {CategoryEditorComponent} from './components/categories/category-editor/category-editor.component';
+import {BrandCreateComponent} from './components/brands/brand-create/brand-create.component';
+import {CategoryCreateComponent} from './components/categories/category-create/category-create.component';
+import {ProductEditorComponent} from './components/goods/product-editor/product-editor.component';
+import {ProductInfoComponent} from './components/goods/product-info/product-info.component';
+import {ProductManagmentComponent} from './components/goods/product-managment/product-managment.component';
+import {ProductCreateComponent} from './components/goods/product-create/product-create.component';
 
 
 const routes: Routes = [
@@ -34,12 +40,18 @@ const routes: Routes = [
   { path: "about", component: AboutComponent, data: { title: "О нас" } },
   { path: "home", redirectTo: "/", pathMatch: "full" },
   // { path: "**", component: NotFoundComponent, data: { title: "Страница не найдена" } },
+  { path: 'brand-create', component: BrandCreateComponent, data: { title: "Создание бренда" } },
   { path: 'brand-list', component: BrandManagmentComponent, data: { title: "Бренды" } },
   { path: 'brand-info', component: BrandInfoComponent, data: { title: "Бренд" } },
   { path: 'brand-edit/:id', component: BrandEditorComponent, data: { title: "Изменение бренда" } },
+  { path: 'category-create', component: CategoryCreateComponent, data: { title: "Создание категории" } },
   { path: 'category-list', component: CategoryManagmentComponent, data: { title: "Категории" } },
-  { path: 'category-info', component: CategoryInfoComponent, data: { title: "Категории" } },
+  { path: 'category-info', component: CategoryInfoComponent, data: { title: "Категория" } },
   { path: 'category-edit/:id', component: CategoryEditorComponent, data: { title: "Изменение категории" } },
+  { path: 'product-create', component: ProductCreateComponent, data: { title: "Создание товара" } },
+  { path: 'product-list', component: ProductManagmentComponent, data: { title: "Товары" } },
+  { path: 'product-info', component: ProductInfoComponent, data: { title: "Товар" } },
+  { path: 'product-edit/:id', component: ProductEditorComponent, data: { title: "Изменение товара" } }
 ];
 
 

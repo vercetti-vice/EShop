@@ -9,10 +9,10 @@
           <li class="active">
             <a id="brandTab" [routerLink]="[]" fragment="brands" href="#brands" data-toggle="tab"><i class="fa fa-spotify" aria-hidden="true"></i> {{'home.tab.Brands' | translate}}</a>
           </li>
-          <li [hidden]="!canViewUsers">
+          <li>
             <a id="categoryTab" [routerLink]="[]" fragment="categories" href="#catgories" data-toggle="tab"><i class="fa fa-stack-exchange" aria-hidden="true"></i> {{'home.tab.Categories' | translate}}</a>
           </li>
-          <li [hidden]="!canViewRoles">
+          <li>
             <a id="productTab" [routerLink]="[]" fragment="products" href="#products" data-toggle="tab"><i class="fa fa-paypal" aria-hidden="true"></i> {{'home.tab.Products' | translate}}</a>
           </li>
         </ul>

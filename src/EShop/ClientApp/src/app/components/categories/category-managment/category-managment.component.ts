@@ -37,14 +37,14 @@ export class CategoryManagmentComponent implements OnInit {
 
   deleteCategory(id: number) {
     this.categoryService.delete(id).pipe(first()).subscribe(() => {
-      this.loadAllCategories()
+      this.loadAllCategories();
     });
   }
 
   private loadAllCategories() {
     this.categoryService.getAll(this.sorts, this.filters, this.page, this.pageSize).pipe(first()).subscribe(categories => {
       this.categories = categories;
-      if(this.categories.length < this.pageSize){
+      if (this.categories.length < this.pageSize) {
         this.nextIsActive = false;
       } else {
         this.nextIsActive = true;

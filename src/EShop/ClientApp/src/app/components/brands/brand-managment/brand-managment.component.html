@@ -19,6 +19,8 @@
       </tbody>
     </table>
     <br>
+   <button [routerLink]="['/brand-create']" class="btn btn-active">Новый бренд</button>
+   <br>
     <a class="button15" *ngIf="page > 1" (click)="previousPage()">Предыдущая</a>
     <a class="button15" (click)="nextPage()" *ngIf="nextIsActive">Следующая</a>
   </div>

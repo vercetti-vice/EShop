@@ -1,3 +1,26 @@
-<p>
-  product-managment works!
-</p>
+<div class="container">
+  <h3>Все товары:</h3>
+  <table class="table-style-two" border="1" sortable-table>
+    <thead>
+    <tr>
+      <th sort-direction="Name" (click)="sort()">Имя товара</th>
+      <th sort-direction="Price" (click)="sort()">Цена товара</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{product.name}}</td>
+      <td>{{product.price}}</td>
+      <td><button (click)="deleteProduct(product.id)" class="btn btn-danger">Удалить</button></td>
+      <td><button [routerLink]="['/product-edit/' + product.id]" class="btn btn-success">Изменить</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+  <button [routerLink]="['/product-create']" class="btn btn-active">Новый товар</button>
+  <br>
+  <a class="button15" *ngIf="page > 1" (click)="previousPage()">Предыдущая</a>
+  <a class="button15" (click)="nextPage()" *ngIf="nextIsActive">Следующая</a>
+</div>

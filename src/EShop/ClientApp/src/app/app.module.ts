@@ -74,6 +74,9 @@ import { ProductEditorComponent } from './components/goods/product-editor/produc
 import {BrandService} from './services/brand.service';
 import {CategoryService} from './services/category.service';
 import {ProductService} from './services/product.service';
+import { BrandCreateComponent } from './components/brands/brand-create/brand-create.component';
+import { CategoryCreateComponent } from './components/categories/category-create/category-create.component';
+import { ProductCreateComponent } from './components/goods/product-create/product-create.component';
 
 
 
@@ -132,7 +135,10 @@ import {ProductService} from './services/product.service';
     CategoryInfoComponent,
     ProductInfoComponent,
     ProductManagmentComponent,
-    ProductEditorComponent
+    ProductEditorComponent,
+    BrandCreateComponent,
+    CategoryCreateComponent,
+    ProductCreateComponent
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
