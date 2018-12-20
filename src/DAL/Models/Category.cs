@@ -14,7 +14,6 @@ namespace DAL.Models
         [ForeignKey("ParentCategories")]
         public int? ParentCategoryId { get; set; }
         public virtual Category ParentCategory { get; protected set; }
-        public virtual IEnumerable<Product> Products { get; protected set; }
 
         public Category(string name, int? parentCategoryId)
         {

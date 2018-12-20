@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let category of categories">
-      <td>{{category.name}}</td>
+      <td><a [routerLink]="['/category-info/' + category.id]">{{category.name}}</a></td>
       <td><button (click)="deleteCategory(category.id)" class="btn btn-danger">Удалить</button></td>
       <td><button [routerLink]="['/category-edit/' + category.id]" class="btn btn-success">Изменить</button></td>
     </tr>

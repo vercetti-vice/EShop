@@ -1,3 +1,13 @@
-<p>
-  product-info works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <h2>Продукт</h2>
+      <p>Название: {{product.name}}</p>
+      <p>Описание: {{product.description}}</p>
+      <p>Цена: {{product.price}}</p>
+      <p>Бренд: {{product.brand.name}}</p>
+      <p>Категория: {{product.category.name}}</p>
+      <p>Изображение: {{product.imageUrl}}</p>
+    </div>
+  </div>
+</div>

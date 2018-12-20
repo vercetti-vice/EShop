@@ -42,15 +42,15 @@ const routes: Routes = [
   // { path: "**", component: NotFoundComponent, data: { title: "Страница не найдена" } },
   { path: 'brand-create', component: BrandCreateComponent, data: { title: "Создание бренда" } },
   { path: 'brand-list', component: BrandManagmentComponent, data: { title: "Бренды" } },
-  { path: 'brand-info', component: BrandInfoComponent, data: { title: "Бренд" } },
+  { path: 'brand-info/:id', component: BrandInfoComponent, data: { title: "Бренд" } },
   { path: 'brand-edit/:id', component: BrandEditorComponent, data: { title: "Изменение бренда" } },
   { path: 'category-create', component: CategoryCreateComponent, data: { title: "Создание категории" } },
   { path: 'category-list', component: CategoryManagmentComponent, data: { title: "Категории" } },
-  { path: 'category-info', component: CategoryInfoComponent, data: { title: "Категория" } },
+  { path: 'category-info/:id', component: CategoryInfoComponent, data: { title: "Категория" } },
   { path: 'category-edit/:id', component: CategoryEditorComponent, data: { title: "Изменение категории" } },
   { path: 'product-create', component: ProductCreateComponent, data: { title: "Создание товара" } },
   { path: 'product-list', component: ProductManagmentComponent, data: { title: "Товары" } },
-  { path: 'product-info', component: ProductInfoComponent, data: { title: "Товар" } },
+  { path: 'product-info/:id', component: ProductInfoComponent, data: { title: "Товар" } },
   { path: 'product-edit/:id', component: ProductEditorComponent, data: { title: "Изменение товара" } }
 ];
 

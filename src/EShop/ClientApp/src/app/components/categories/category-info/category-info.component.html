@@ -1,3 +1,9 @@
-<p>
-  category-info works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+      <h2>Категория</h2>
+      <p>Название: {{category.name}}</p>
+      <p *ngIf="category.parentCategory != null">Родительская категория: {{category.parentCategory.name}}</p>
+    </div>
+  </div>
+</div>

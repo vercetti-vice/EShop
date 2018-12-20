@@ -11,8 +11,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let brand of brands">
-        <td >{{brand.name}}</td>
-        <td >{{brand.description}}</td>
+        <td><a [routerLink]="['/brand-info/' + brand.id]">{{brand.name}}</a></td>
+        <td>{{brand.description}}</td>
         <td><button (click)="deleteBrand(brand.id)" class="btn btn-danger">Удалить</button></td>
         <td><button [routerLink]="['/brand-edit/' + brand.id]" class="btn btn-success">Изменить</button></td>
       </tr>

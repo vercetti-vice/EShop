@@ -35,7 +35,7 @@ namespace EShop.Controllers
         {
             var model = new SieveModel { Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize };
 
-            var products = _context.Products.AsNoTracking(); // TODO : Подумай насчет Инклюдов
+            var products = _context.Products.Include(x => x.Brand).Include(y => y.Category).AsNoTracking(); // TODO : Подумай насчет Инклюдов
             products = _sieveProcessor.Apply(model, products);
             return Ok(products.ToList());
         }
@@ -43,7 +43,8 @@ namespace EShop.Controllers
         [HttpGet]
         public ActionResult GetById(int id)
         {
-            var product = _context.Products.Find(id);
+            var product = _context.Products.Include(x => x.Brand).Include(y => y.Category)
+                .FirstOrDefault(z => z.Id == id);
 
             if (product == null)
             {

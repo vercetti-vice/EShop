@@ -31,8 +31,13 @@ export class ProductManagmentComponent implements OnInit {
   @Input('sort-direction')
   sortDirection = '';
 
-  sort() {
+  sortName() {
     this.sortDirection = this.sortDirection === 'Name' ? '-Name' : 'Name';
+    this.sorts = this.sortDirection;
+    this.loadAllProducts();
+  }
+
+  sortPrice() {
     this.sortDirection = this.sortDirection === 'Price' ? '-Price' : 'Price';
     this.sorts = this.sortDirection;
     this.loadAllProducts();

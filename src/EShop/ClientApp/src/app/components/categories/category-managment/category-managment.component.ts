@@ -17,7 +17,7 @@ export class CategoryManagmentComponent implements OnInit {
   sorts = '';
   filters = '';
   page = 1;
-  pageSize = 10;
+  pageSize = 100;
 
   constructor(private categoryService: CategoryService) {
   }

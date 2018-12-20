@@ -18,6 +18,7 @@ export class CategoryEditorComponent implements OnInit {
   editCategoryForm: FormGroup;
   loading = false;
   submitted = false;
+  selectedOption = true;
 
   sorts = '';
   filters = '';

@@ -20,7 +20,11 @@
           <label for="parentCategoryId">Родительская категория:</label>
           <select class="form-control" formControlName="parentCategoryId">
             <option></option>
-            <option selected="selected" *ngIf="category.parentCategoryId != null" [value]="category.parentCategoryId"> {{ category.parentCategory.name }} </option>
+            <ng-container *ngFor="let catego of categories">
+              <option [value]="catego.id" *ngIf="catego.id == category.parentCategoryId" [selected]="selectedOption">
+                {{ catego.name }}
+              </option>
+            </ng-container>
             <ng-container *ngFor="let categor of categories">
               <option [value]="categor.id" *ngIf="categor.id != category.parentCategoryId && categor.id != category.id">
                 {{ categor.name }}

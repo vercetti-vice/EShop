@@ -11,8 +11,7 @@ namespace DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-
-        public virtual IEnumerable<Product> Products { get; protected set; }
+        
 
         public Brand(string name, string description, string imageUrl)
         {

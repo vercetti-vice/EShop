@@ -8,5 +8,4 @@ export class Category {
   public name: string;
   public parentCategoryId: number;
   public parentCategory: Category;
-  public products: any;
 }
