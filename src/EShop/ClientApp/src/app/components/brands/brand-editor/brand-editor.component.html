@@ -1,11 +1,11 @@
-<div class="jumbotron">
+
   <div class="container">
     <div class="row">
       <div class="col-sm-6 offset-sm-3">
         <h2>Изменение бренда</h2>
         <form [formGroup]="editBrandForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <input type="text" formControlName="id" [(ngModel)]="brand.id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" hidden/>
+            <input type="text" formControlName="id" [(ngModel)]="brand.id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" disabled />
             <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
               <div *ngIf="f.id.errors.required">Идентификатор обязателен</div>
             </div>
@@ -40,4 +40,3 @@
       </div>
     </div>
   </div>
-</div>

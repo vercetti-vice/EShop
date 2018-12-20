@@ -4,7 +4,7 @@
       <h2>Изменение категории</h2>
       <form [formGroup]="editCategoryForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <input type="text" formControlName="id" [(ngModel)]="category.id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" hidden/>
+          <input type="text" formControlName="id" [(ngModel)]="category.id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" disabled />
           <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
             <div *ngIf="f.id.errors.required">Идентификатор обязателен</div>
           </div>
@@ -20,13 +20,8 @@
           <label for="parentCategoryId">Родительская категория:</label>
           <select class="form-control" formControlName="parentCategoryId">
             <option></option>
-            <ng-container *ngFor="let catego of categories">
-              <option [value]="catego.id" *ngIf="catego.id == category.parentCategoryId" [selected]="selectedOption">
-                {{ catego.name }}
-              </option>
-            </ng-container>
             <ng-container *ngFor="let categor of categories">
-              <option [value]="categor.id" *ngIf="categor.id != category.parentCategoryId && categor.id != category.id">
+              <option [value]="categor.id" *ngIf="categor.id != category.id">
                 {{ categor.name }}
               </option>
             </ng-container>

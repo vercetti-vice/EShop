@@ -34,11 +34,11 @@ export class CategoryEditorComponent implements OnInit {
     this.id = this.activateRoute.snapshot.params['id'];
     this.getCategory(this.id);
     this.loadAllCategories();
-    this.editCategoryForm = this.formBuilder.group({
-      id: [this.category.id, Validators.required],
-      name: [this.category.name, Validators.required],
-      parentCategoryId: []
-    });
+    // this.editCategoryForm = this.formBuilder.group({
+    //   id: [this.category.id, Validators.required],
+    //   name: [this.category.name, Validators.required],
+    //   parentCategoryId: [this.category.parentCategoryId]
+    // });
   }
 
   // convenience getter for easy access to form fields
@@ -50,6 +50,12 @@ export class CategoryEditorComponent implements OnInit {
       this.category.name = category.name;
       this.category.parentCategoryId = category.parentCategoryId;
       this.category.parentCategory = category.parentCategory;
+
+      this.editCategoryForm = this.formBuilder.group({
+        id: [category.id, Validators.required],
+        name: [category.name, Validators.required],
+        parentCategoryId: [category.parentCategoryId]
+      });
     });
   }
 

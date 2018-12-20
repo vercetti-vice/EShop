@@ -4,7 +4,7 @@
       <h2>Изменение товара</h2>
       <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <input type="text" formControlName="id" [(ngModel)]="product.id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+          <input type="text" formControlName="id" [(ngModel)]="product.id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" disabled />
           <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
             <div *ngIf="f.id.errors.required">Идентификатор обязателен</div>
           </div>
@@ -17,17 +17,46 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="brandId">Бренд:</label>
+          <select class="form-control" formControlName="brandId" [ngClass]="{ 'is-invalid': submitted && f.brandId.errors }">
+              <option [ngValue]="brand.id" *ngFor="let brand of brands">
+                {{ brand.name }}
+              </option>
+          </select>
+          <div *ngIf="submitted && f.brandId.errors" class="invalid-feedback">
+            <div *ngIf="f.brandId.errors.required">Бренд обязателен</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="categoryId">Категория:</label>
+          <select class="form-control" formControlName="categoryId" [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
+              <option [ngValue]="category.id" *ngFor="let category of categories">
+                {{ category.name }}
+              </option>
+          </select>
+          <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+            <div *ngIf="f.categoryId.errors.required">Категория обязательна</div>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="description">Описание</label>
-          <input type="text" formControlName="description" [(ngModel)]="product.description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">Описание обязательно</div>
+          <input type="text" formControlName="description" [(ngModel)]="product.description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+          <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+            <div *ngIf="f.description.errors.required">Описание обязательно</div>
           </div>
         </div>
         <div class="form-group">
           <label for="price">Цена</label>
-          <input type="text" formControlName="price" [(ngModel)]="product.price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">Цена обязательна</div>
+          <input type="text" formControlName="price" [(ngModel)]="product.price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+          <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+            <div *ngIf="f.price.errors.required">Цена обязательна</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Ссылка на изображение</label>
+          <input type="text" formControlName="imageUrl" [(ngModel)]="product.imageUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.imageUrl.errors }" />
+          <div *ngIf="submitted && f.imageUrl.errors" class="invalid-feedback">
+            <div *ngIf="f.imageUrl.errors.required">Ссылка на изображение обязательна</div>
           </div>
         </div>
         <div class="form-group">

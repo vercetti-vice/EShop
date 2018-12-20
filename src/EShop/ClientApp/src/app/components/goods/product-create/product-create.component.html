@@ -13,7 +13,6 @@
         <div class="form-group">
           <label for="brandId">Бренд:</label>
           <select class="form-control" formControlName="brandId" name="brandId" [ngClass]="{ 'is-invalid': submitted && f.parentCategoryId.errors }">
-            <option></option>
             <ng-container *ngFor="let brand of brands">
               <option [value]="brand.id">
                 {{ brand.name }}
@@ -27,7 +26,6 @@
         <div class="form-group">
           <label for="categoryId">Категория:</label>
           <select class="form-control" formControlName="categoryId" name="categoryId" [ngClass]="{ 'is-invalid': submitted && f.parentCategoryId.errors }">
-            <option></option>
             <ng-container *ngFor="let category of categories">
               <option [value]="category.id">
                 {{ category.name }}
@@ -35,7 +33,7 @@
             </ng-container>
           </select>
           <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
-            <div *ngIf="f.categoryId.errors.required">Бренд обязателен</div>
+            <div *ngIf="f.categoryId.errors.required">Категория обязательна</div>
           </div>
         </div>
         <div class="form-group">

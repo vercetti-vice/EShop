@@ -108,13 +108,13 @@ namespace DAL
                     DateModified = DateTime.UtcNow
                 };
 
-                Brand brand_1 = new Brand("Adidas", "Немецкое качество", "http://adidas.com");
-                Brand brand_2 = new Brand("Microsoft", "Американский Государственный долг", "http://microsoft.com");
-                Brand brand_3 = new Brand("Redmond", "Лучшие мультиварки на планете", "http://redmond.com");
-                Brand brand_4 = new Brand("Xiaomi", "Мы слоамли Китайскую стену", "http://xiaomi.com");
-                Brand brand_5 = new Brand("Hitachi", "Раньше мы делали что-то, а теперь нет", "http://hitachi.com");
-                Brand brand_6 = new Brand("Apple", "Самая крупная американская компания", "http://apple.com");
-                Brand brand_7 = new Brand("Canon", "Фотоаппараты? Это к ним", "http://canon.com");
+                Brand brand_1 = new Brand("Adidas", "Немецкое качество", "http://4erwge7if1e2ap8yq43nh9h1.wpengine.netdna-cdn.com/wp-content/uploads/2018/05/logo-adidas-300x300.png");
+                Brand brand_2 = new Brand("Microsoft", "Американский Государственный долг", "https://az801952.vo.msecnd.net/migration/partner-16.jpg");
+                Brand brand_3 = new Brand("Redmond", "Лучшие мультиварки на планете", "https://shopogolikam.ru/images/redmond.jpg");
+                Brand brand_4 = new Brand("Xiaomi", "Мы слоамли Китайскую стену", "https://fitnessbit.ru/wp-content/uploads/2017/11/xiaomi-mi-fit.png");
+                Brand brand_5 = new Brand("Hitachi", "Раньше мы делали что-то, а теперь нет", "https://pts-trading.de/media/image/48/93/16/hitachi.png");
+                Brand brand_6 = new Brand("Apple", "Самая крупная американская компания", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/300px-Apple_logo_black.svg.png");
+                Brand brand_7 = new Brand("Canon", "Фотоаппараты? Это к ним", "http://logotypes101.com/logos/556/FE9C737C8A5B988A52B4F3ACE1967CCA/Canon195.png");
 
                 Category category_1 = new Category("Портативная техника", null);
                 Category category_2 = new Category("Смартфоны", 1);
@@ -126,9 +126,9 @@ namespace DAL
                 Category category_8 = new Category("Экшн-камеры", 5);
 
                 Product product_1 = new Product("iPhone X", 2, 6, 20000,
-                    "Самый инновационный смартфон на данный момент", "http://iphonex.com");
+                    "Самый инновационный смартфон на данный момент", "https://mcdn01.gittigidiyor.net/39006/tn30/390063604_tn30_0.jpg");
                 Product product_2 = new Product("Canon 50D", 6, 7, 25000,
-                    "Надёжный фотоаппарат на века", "http://canon50D.com");
+                    "Надёжный фотоаппарат на века", "http://www.lasuitenumerique.com/wp-content/uploads/2015/05/550d-eos-canon-1-300x300.jpg");
 
                 _context.Customers.Add(cust_1);
                 _context.Customers.Add(cust_2);
