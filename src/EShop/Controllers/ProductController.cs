@@ -60,7 +60,7 @@ namespace EShop.Controllers
         [HttpGet]
         public ActionResult SearchNew(string searchQuery, int count)
         {
-            var firstRun = _context.Products.FromSql("SELECT * FROM find({0})", searchQuery)
+            var firstRun = _context.Products.FromSql("SELECT * FROM public.find({0})", searchQuery)
                 .Take(count)
                 .ToList();
             if (firstRun.Count == 0)
