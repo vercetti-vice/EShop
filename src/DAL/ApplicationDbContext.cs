@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using DAL.Models.Interfaces;
+using Microsoft.EntityFrameworkCore.Design;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace DAL
 {
@@ -18,12 +21,11 @@ namespace DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
-
-
+        
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }
-
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

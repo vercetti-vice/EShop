@@ -35,7 +35,10 @@ namespace EShop.Controllers
         {
             var model = new SieveModel { Sorts = sorts, Filters = filters, Page = page, PageSize = pageSize };
 
-            var products = _context.Products.Include(x => x.Brand).Include(y => y.Category).AsNoTracking(); // TODO : Подумай насчет Инклюдов
+            var products = _context.Products
+                .Include(x => x.Brand)
+                .Include(y => y.Category)
+                .AsNoTracking();
             products = _sieveProcessor.Apply(model, products);
             return Ok(products.ToList());
         }
@@ -52,6 +55,41 @@ namespace EShop.Controllers
             }
 
             return Ok(product);
+        }
+
+        [HttpGet]
+        public ActionResult SearchNew(string searchQuery, int count)
+        {
+            var firstRun = _context.Products.FromSql("SELECT * FROM find({0})", searchQuery)
+                .Take(count)
+                .ToList();
+            if (firstRun.Count == 0)
+            {
+                return BadRequest();
+            }
+
+            var secondRun = _context.Products
+                .Where(x => x.CategoryId == firstRun[0].CategoryId && x.BrandId == firstRun[0].BrandId)
+                .Take(count)
+                .ToList();
+
+            firstRun = firstRun.Union(secondRun)
+                .Take(count)
+                .ToList();
+
+            if (firstRun.Count < count)
+            {
+                var max = firstRun[0].Price * 1.15;
+
+                var min = firstRun[0].Price * 0.85;
+
+                var thirdRun = _context.Products
+                    .Where(x => x.CategoryId == firstRun[0].CategoryId && x.Price < max && x.Price > min);
+
+                firstRun = firstRun.Union(thirdRun).Take(count).ToList();
+            }
+
+            return Ok(firstRun);
         }
 
         [HttpPost]

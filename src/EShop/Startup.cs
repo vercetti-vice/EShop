@@ -20,6 +20,7 @@ using EShop.Helpers;
 using EShop.ViewModels;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using Npgsql;
 using EShop.Helpers.Sieve;
 using Sieve.Models;
 using Sieve.Services;
@@ -42,12 +43,8 @@ namespace EShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                //options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("EShop"));
-                
-                options.UseInMemoryDatabase();
-                options.UseOpenIddict();
-            });
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
 
             // add identity
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -124,10 +121,10 @@ namespace EShop
 
 
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist";
+            //});
 
 
             //Todo: ***Using DataAnnotations for validation until Swashbuckle supports FluentValidation***
@@ -190,6 +187,8 @@ namespace EShop
             services.AddSingleton<IAuthorizationHandler, ViewRoleAuthorizationHandler>();
             services.AddSingleton<IAuthorizationHandler, AssignRolesAuthorizationHandler>();
 
+
+
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
         }
@@ -225,7 +224,7 @@ namespace EShop
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
             app.UseAuthentication();
 
 
@@ -236,6 +235,12 @@ namespace EShop
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShop API V1");
             });
 
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider
+                    .GetService<ApplicationDbContext>()
+                    .Database.Migrate();
+            }
 
             app.UseMvc(routes =>
             {
@@ -243,21 +248,20 @@ namespace EShop
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //    // see https://go.microsoft.com/fwlink/?linkid=864501
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+            //    spa.Options.SourcePath = "ClientApp";
 
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(60); // Increase the timeout if angular app is taking longer to startup
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200"); // Use this instead to use the angular cli server
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //        spa.Options.StartupTimeout = TimeSpan.FromSeconds(60); // Increase the timeout if angular app is taking longer to startup
+            //        //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200"); // Use this instead to use the angular cli server
+            //    }
+            //});
         }
     }
 }

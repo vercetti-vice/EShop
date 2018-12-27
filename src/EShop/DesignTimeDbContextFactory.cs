@@ -1,8 +1,3 @@
- 
- 
-// Email: support@ebenmonney.com
- 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +25,7 @@ namespace EShop
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            builder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("DAL"));
+            builder.UseNpgsql(configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("DAL"));
             builder.UseOpenIddict();
 
             return new ApplicationDbContext(builder.Options);
