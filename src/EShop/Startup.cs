@@ -202,11 +202,11 @@ namespace EShop
             loggerFactory.AddDebug(LogLevel.Warning);
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
 
-            //using (var serviceScope = app.ApplicationServices.CreateScope())
-            //{
-            //    var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-            //    context.Database.Migrate();
-            //}
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
 
             Utilities.ConfigureLogger(loggerFactory);
             EmailTemplates.Initialize(env);
@@ -264,18 +264,6 @@ namespace EShop
             //        //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200"); // Use this instead to use the angular cli server
             //    }
             //});
-        }
-        private static void UpdateDatabase(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
         }
     }
 }
