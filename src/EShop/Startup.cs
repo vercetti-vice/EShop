@@ -202,8 +202,8 @@ namespace EShop
             loggerFactory.AddDebug(LogLevel.Warning);
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
 
-            UpdateDatabase(app);
 
+            UpdateDatabase(app);
             Utilities.ConfigureLogger(loggerFactory);
             EmailTemplates.Initialize(env);
 
@@ -238,7 +238,7 @@ namespace EShop
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShop API V1");
             });
 
-             
+
 
             app.UseMvc(routes =>
             {
