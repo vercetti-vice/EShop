@@ -9,7 +9,7 @@
 
 export const environment = {
   production: true,
-  baseUrl: "http://localhost:8888",
+  baseUrl: "http://149.154.64.172:8888",
   loginUrl: "/Login"
 };
 

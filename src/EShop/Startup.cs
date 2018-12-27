@@ -235,12 +235,7 @@ namespace EShop
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShop API V1");
             });
 
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider
-                    .GetService<ApplicationDbContext>()
-                    .Database.Migrate();
-            }
+             
 
             app.UseMvc(routes =>
             {
