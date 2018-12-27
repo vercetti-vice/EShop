@@ -202,11 +202,11 @@ namespace EShop
             loggerFactory.AddDebug(LogLevel.Warning);
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
 
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-                context.Database.Migrate();
-            }
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            //    context.Database.Migrate();
+            //}
 
             Utilities.ConfigureLogger(loggerFactory);
             EmailTemplates.Initialize(env);
