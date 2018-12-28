@@ -50,8 +50,8 @@ namespace EShop
             {
                 //options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("EShop"));
 
-                // options.UseInMemoryDatabase();
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseInMemoryDatabase();
+                //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
                 options.UseOpenIddict();
             });
 
@@ -211,11 +211,11 @@ namespace EShop
             loggerFactory.AddDebug(LogLevel.Warning);
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
 
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-                context.Database.Migrate();
-            }
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            //    context.Database.Migrate();
+            //}
 
             Utilities.ConfigureLogger(loggerFactory);
             EmailTemplates.Initialize(env);
