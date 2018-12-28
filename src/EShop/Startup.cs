@@ -43,8 +43,17 @@ namespace EShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                //options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("EShop"));
+
+                // options.UseInMemoryDatabase();
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseOpenIddict();
+            });
 
 
             // add identity
