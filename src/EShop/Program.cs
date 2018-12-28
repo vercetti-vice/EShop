@@ -20,7 +20,7 @@ namespace EShop
                 try
                 {
                     var databaseInitializer = services.GetRequiredService<IDatabaseInitializer>();
-                    //databaseInitializer.SeedAsync().Wait();
+                    databaseInitializer.SeedAsync().Wait();
                 }
                 catch (Exception ex)
                 {
